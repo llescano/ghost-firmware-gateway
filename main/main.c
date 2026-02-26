@@ -24,6 +24,7 @@
 #include "wifi_manager.h"
 #include "supabase_client.h"
 #include "sntp_sync.h"
+#include "command_processor.h"
 
 // ============================================================================
 // Constantes y configuración
@@ -134,6 +135,16 @@ static void on_wifi_state_change(wifi_state_t state, void *ctx)
             ESP_LOGI(TAG, "Evento de prueba enviado correctamente!");
         } else {
             ESP_LOGE(TAG, "Error enviando evento: %s", esp_err_to_name(ret));
+        }
+
+        // Inicializar procesador de comandos remotos
+        ESP_LOGI(TAG, "Inicializando procesador de comandos remotos...");
+        ret = command_processor_init();
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Error inicializando command processor: %s", esp_err_to_name(ret));
+            // No crashear - el sistema puede funcionar sin comandos remotos
+        } else {
+            ESP_LOGI(TAG, "Procesador de comandos remotos iniciado");
         }
         
     } else if (state == WIFI_STATE_DISCONNECTED) {
