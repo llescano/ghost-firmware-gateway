@@ -1,0 +1,53 @@
+# sdkconfig.defaults - firmware_gateway
+# Configuración base para ESP32-S3-Zero (Gateway Central)
+# NOTA: Este archivo SOLO se aplica cuando NO existe sdkconfig
+
+# === Target MCU ===
+CONFIG_IDF_TARGET="esp32s3"
+
+# === Flash Size ===
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+
+# === Partitions ===
+# Usar tabla de particiones personalizada (2MB para factory app)
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# === PSRAM (ESP32-S3) ===
+# Ignorar si no se encuentra PSRAM - permite boot en dispositivos sin PSRAM
+CONFIG_SPIRAM_IGNORE_NOTFOUND=y
+
+# === WiFi ===
+CONFIG_ESP_WIFI_ENABLED=y
+CONFIG_ESP_WIFI_STATIC_RX_BUFFER_NUM=10
+CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM=32
+CONFIG_ESP_WIFI_DYNAMIC_TX_BUFFER_NUM=32
+
+# === ESP-NOW ===
+CONFIG_ESP_WIFI_SOFTAP_SUPPORT=y
+CONFIG_ESP_WIFI_NAN_SUPPORT=y
+
+# === NVS ===
+CONFIG_NVS_ENCRYPTION=n
+
+# === Logging ===
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_LOG_MAXIMUM_LEVEL_DEBUG=y
+
+# === FreeRTOS ===
+CONFIG_FREERTOS_HZ=1000
+# Aumentar stack del Timer Service para led_indicator
+CONFIG_FREERTOS_TIMER_TASK_STACK_DEPTH=4096
+# Aumentar stack del Event Task para HTTP/TLS
+CONFIG_ESP_SYSTEM_EVENT_TASK_STACK_SIZE=8192
+
+# === LwIP ===
+CONFIG_LWIP_TCP_MSS=1436
+CONFIG_LWIP_TCP_SND_BUF_DEFAULT=5744
+CONFIG_LWIP_TCP_WND_DEFAULT=5744
+
+# === TLS Certificate Bundle ===
+# Habilitar bundle de certificados raíz para HTTPS
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE_DEFAULT_FULL=y
+CONFIG_MBEDTLS_HARDWARE_AES=y
+CONFIG_MBEDTLS_HARDWARE_SHA=y

@@ -1,0 +1,194 @@
+Command: ninja all
+[1/11] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D I:\esp32\ghost\firmware_gateway\build\bootloader\esp-idf\esptool_py && C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe I:/esp32/v5.5.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 I:/esp32/ghost/firmware_gateway/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5240 bytes. 0x2dc0 bytes (36%) free.
+[2/11] No install step for 'bootloader'
+[3/11] Completed 'bootloader'
+[4/11] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[5/11] Building C object esp-idf/supabase_client/CMakeFiles/__idf_supabase_client.dir/src/supabase_client.c.obj
+FAILED: esp-idf/supabase_client/CMakeFiles/__idf_supabase_client.dir/src/supabase_client.c.obj 
+ccache C:\Users\Luis\.espressif\tools\xtensa-esp-elf\esp-14.2.0_20241119\xtensa-esp-elf\bin\xtensa-esp32s3-elf-gcc.exe -DESP_PLATFORM -DIDF_VER=\"v5.5.1-dirty\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -II:/esp32/ghost/firmware_gateway/build/config -II:/esp32/ghost/firmware_gateway/components/supabase_client/include -II:/esp32/v5.5.1/esp-idf/components/newlib/platform_include -II:/esp32/v5.5.1/esp-idf/components/freertos/config/include -II:/esp32/v5.5.1/esp-idf/components/freertos/config/include/freertos -II:/esp32/v5.5.1/esp-idf/components/freertos/config/xtensa/include -II:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/include -II:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -II:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -II:/esp32/v5.5.1/esp-idf/components/freertos/esp_additions/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/include/soc -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/include/soc/esp32s3 -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/dma/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/ldo/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/debug_probe/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/mspi_timing_tuning/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/mspi_timing_tuning/tuning_scheme_impl/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/power_supply/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/port/esp32s3/. -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/port/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/mspi_timing_tuning/port/esp32s3/. -II:/esp32/v5.5.1/esp-idf/components/esp_hw_support/mspi_timing_tuning/port/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/heap/include -II:/esp32/v5.5.1/esp-idf/components/heap/tlsf -II:/esp32/v5.5.1/esp-idf/components/log/include -II:/esp32/v5.5.1/esp-idf/components/soc/include -II:/esp32/v5.5.1/esp-idf/components/soc/esp32s3 -II:/esp32/v5.5.1/esp-idf/components/soc/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/soc/esp32s3/register -II:/esp32/v5.5.1/esp-idf/components/hal/platform_port/include -II:/esp32/v5.5.1/esp-idf/components/hal/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/hal/include -II:/esp32/v5.5.1/esp-idf/components/esp_rom/include -II:/esp32/v5.5.1/esp-idf/components/esp_rom/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/esp_rom/esp32s3/include/esp32s3 -II:/esp32/v5.5.1/esp-idf/components/esp_rom/esp32s3 -II:/esp32/v5.5.1/esp-idf/components/esp_common/include -II:/esp32/v5.5.1/esp-idf/components/esp_system/include -II:/esp32/v5.5.1/esp-idf/components/esp_system/port/soc -II:/esp32/v5.5.1/esp-idf/components/esp_system/port/include/private -II:/esp32/v5.5.1/esp-idf/components/xtensa/esp32s3/include -II:/esp32/v5.5.1/esp-idf/components/xtensa/include -II:/esp32/v5.5.1/esp-idf/components/xtensa/deprecated_include -II:/esp32/v5.5.1/esp-idf/components/lwip/include -II:/esp32/v5.5.1/esp-idf/components/lwip/include/apps -II:/esp32/v5.5.1/esp-idf/components/lwip/include/apps/sntp -II:/esp32/v5.5.1/esp-idf/components/lwip/lwip/src/include -II:/esp32/v5.5.1/esp-idf/components/lwip/port/include -II:/esp32/v5.5.1/esp-idf/components/lwip/port/freertos/include -II:/esp32/v5.5.1/esp-idf/components/lwip/port/esp32xx/include -II:/esp32/v5.5.1/esp-idf/components/lwip/port/esp32xx/include/arch -II:/esp32/v5.5.1/esp-idf/components/lwip/port/esp32xx/include/sys -II:/esp32/v5.5.1/esp-idf/components/esp_http_client/include -II:/esp32/v5.5.1/esp-idf/components/esp_event/include -II:/esp32/v5.5.1/esp-idf/components/nvs_flash/include -II:/esp32/v5.5.1/esp-idf/components/esp_partition/include -II:/esp32/v5.5.1/esp-idf/components/json/cJSON -II:/esp32/v5.5.1/esp-idf/components/esp-tls -II:/esp32/v5.5.1/esp-idf/components/esp-tls/esp-tls-crypto -II:/esp32/v5.5.1/esp-idf/components/mbedtls/port/include -II:/esp32/v5.5.1/esp-idf/components/mbedtls/mbedtls/include -II:/esp32/v5.5.1/esp-idf/components/mbedtls/mbedtls/library -II:/esp32/v5.5.1/esp-idf/components/mbedtls/esp_crt_bundle/include -II:/esp32/v5.5.1/esp-idf/components/mbedtls/mbedtls/3rdparty/everest/include -II:/esp32/v5.5.1/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m -II:/esp32/v5.5.1/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -fdiagnostics-color=always -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-error=extra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fno-shrink-wrap -fmacro-prefix-map=I:/esp32/ghost/firmware_gateway=. -fmacro-prefix-map=I:/esp32/v5.5.1/esp-idf=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/supabase_client/CMakeFiles/__idf_supabase_client.dir/src/supabase_client.c.obj -MF esp-idf\supabase_client\CMakeFiles\__idf_supabase_client.dir\src\supabase_client.c.obj.d -o esp-idf/supabase_client/CMakeFiles/__idf_supabase_client.dir/src/supabase_client.c.obj -c I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c: In function 'tls_post_request_anon':
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:261:55: error: 'supabase_context_t' has no member named 'config'
+  261 |     snprintf(url, sizeof(url), "https://%s%s%s", s_ctx.config.host, path);
+      |                                                       ^
+In file included from I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:13:
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:54: error: 'supabase_context_t' has no member named 'config'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |                                                      ^
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:220:167: note: in definition of macro 'ESP_LOG_LEVEL'
+  220 |         if (ESP_LOG_GET_LEVEL(configs)==ESP_LOG_ERROR)        { esp_log(ESP_LOG_CONFIG_INIT(ESP_LOG_ERROR),   tag, LOG_FORMAT(E, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                                                       ^~~~~~~~~~~
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:127:41: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  127 | #define ESP_LOGI(tag, format, ...) do { ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, tag, format, ##__VA_ARGS__); } while(0)
+      |                                         ^~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:5: note: in expansion of macro 'ESP_LOGI'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |     ^~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:54: error: 'supabase_context_t' has no member named 'config'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |                                                      ^
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:221:167: note: in definition of macro 'ESP_LOG_LEVEL'
+  221 |         else if (ESP_LOG_GET_LEVEL(configs)==ESP_LOG_WARN)    { esp_log(ESP_LOG_CONFIG_INIT(ESP_LOG_WARN),    tag, LOG_FORMAT(W, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                                                       ^~~~~~~~~~~
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:127:41: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  127 | #define ESP_LOGI(tag, format, ...) do { ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, tag, format, ##__VA_ARGS__); } while(0)
+      |                                         ^~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:5: note: in expansion of macro 'ESP_LOGI'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |     ^~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:54: error: 'supabase_context_t' has no member named 'config'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |                                                      ^
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:222:167: note: in definition of macro 'ESP_LOG_LEVEL'
+  222 |         else if (ESP_LOG_GET_LEVEL(configs)==ESP_LOG_DEBUG)   { esp_log(ESP_LOG_CONFIG_INIT(ESP_LOG_DEBUG),   tag, LOG_FORMAT(D, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                                                       ^~~~~~~~~~~
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:127:41: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  127 | #define ESP_LOGI(tag, format, ...) do { ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, tag, format, ##__VA_ARGS__); } while(0)
+      |                                         ^~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:5: note: in expansion of macro 'ESP_LOGI'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |     ^~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:54: error: 'supabase_context_t' has no member named 'config'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |                                                      ^
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:223:167: note: in definition of macro 'ESP_LOG_LEVEL'
+  223 |         else if (ESP_LOG_GET_LEVEL(configs)==ESP_LOG_VERBOSE) { esp_log(ESP_LOG_CONFIG_INIT(ESP_LOG_VERBOSE), tag, LOG_FORMAT(V, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                                                       ^~~~~~~~~~~
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:127:41: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  127 | #define ESP_LOGI(tag, format, ...) do { ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, tag, format, ##__VA_ARGS__); } while(0)
+      |                                         ^~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:5: note: in expansion of macro 'ESP_LOGI'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |     ^~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:54: error: 'supabase_context_t' has no member named 'config'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |                                                      ^
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:224:167: note: in definition of macro 'ESP_LOG_LEVEL'
+  224 |         else                                                  { esp_log(ESP_LOG_CONFIG_INIT(ESP_LOG_INFO),    tag, LOG_FORMAT(I, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                                                                                                       ^~~~~~~~~~~
+I:/esp32/v5.5.1/esp-idf/components/log/include/esp_log.h:127:41: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  127 | #define ESP_LOGI(tag, format, ...) do { ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO, tag, format, ##__VA_ARGS__); } while(0)
+      |                                         ^~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:263:5: note: in expansion of macro 'ESP_LOGI'
+  263 |     ESP_LOGI(TAG, "Conectando a %s (path: %s)", s_ctx.config.host, path);
+      |     ^~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:266:5: error: unknown type name 'esp_http_client_config_t'
+  266 |     esp_http_client_config_t http_config = {};
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:267:16: error: request for member 'url' in something not a structure or union
+  267 |     http_config.url = url;
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:268:16: error: request for member 'method' in something not a structure or union
+  268 |     http_config.method = HTTP_METHOD_POST;
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:268:26: error: 'HTTP_METHOD_POST' undeclared (first use in this function)
+  268 |     http_config.method = HTTP_METHOD_POST;
+      |                          ^~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:268:26: note: each undeclared identifier is reported only once for each function it appears in
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:269:16: error: request for member 'timeout_ms' in something not a structure or union
+  269 |     http_config.timeout_ms = SUPABASE_TIMEOUT_MS;
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:270:16: error: request for member 'buffer_size' in something not a structure or union
+  270 |     http_config.buffer_size = 4096;
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:271:16: error: request for member 'buffer_size_tx' in something not a structure or union
+  271 |     http_config.buffer_size_tx = 4096;
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:272:16: error: request for member 'user_agent' in something not a structure or union
+  272 |     http_config.user_agent = "ESP32-Gateway/1.0";
+      |                ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:274:5: error: unknown type name 'esp_http_client_handle_t'
+  274 |     esp_http_client_handle_t client = esp_http_client_init(&http_config);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:274:39: error: implicit declaration of function 'esp_http_client_init' [-Wimplicit-function-declaration]
+  274 |     esp_http_client_handle_t client = esp_http_client_init(&http_config);
+      |                                       ^~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:275:16: warning: comparison between pointer and integer
+  275 |     if (client == NULL) {
+      |                ^~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:281:5: error: implicit declaration of function 'esp_http_client_set_header' [-Wimplicit-function-declaration]
+  281 |     esp_http_client_set_header(client, "Content-Type", "application/json");
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:282:55: error: 'supabase_context_t' has no member named 'config'
+  282 |     esp_http_client_set_header(client, "apikey", s_ctx.config.anon_key);
+      |                                                       ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:288:12: error: 'esp_tls_cfg_t' {aka 'struct esp_tls_cfg'} has no member named 'insecure'
+  288 |     tls_cfg.insecure = false;
+      |            ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:292:22: error: too many arguments to function 'esp_tls_init'
+  292 |     esp_tls_t *tls = esp_tls_init(&tls_cfg);
+      |                      ^~~~~~~~~~~~
+In file included from I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:14:
+I:/esp32/v5.5.1/esp-idf/components/esp-tls/esp_tls.h:385:12: note: declared here
+  385 | esp_tls_t *esp_tls_init(void);
+      |            ^~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:295:9: error: implicit declaration of function 'esp_http_client_cleanup'; did you mean 'esp_reent_cleanup'? [-Wimplicit-function-declaration]
+  295 |         esp_http_client_cleanup(client);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+      |         esp_reent_cleanup
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:301:5: error: implicit declaration of function 'esp_tls_set_alpn_protocols'; did you mean 'mbedtls_ssl_get_alpn_protocol'? [-Wimplicit-function-declaration]
+  301 |     esp_tls_set_alpn_protocols(tls, alpn_protos, sizeof(alpn_protos) / sizeof(alpn_protos[0]));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+      |     mbedtls_ssl_get_alpn_protocol
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:304:5: error: implicit declaration of function 'esp_http_client_set_transport' [-Wimplicit-function-declaration]
+  304 |     esp_http_client_set_transport(client, esp_http_transport_type_t::ESP_HTTP_TRANSPORT_OVER_SSL, tls);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:304:43: error: 'esp_http_transport_type_t' undeclared (first use in this function); did you mean 'esp_tls_error_type_t'?
+  304 |     esp_http_client_set_transport(client, esp_http_transport_type_t::ESP_HTTP_TRANSPORT_OVER_SSL, tls);
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                           esp_tls_error_type_t
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:304:68: error: expected ')' before '::' token
+  304 |     esp_http_client_set_transport(client, esp_http_transport_type_t::ESP_HTTP_TRANSPORT_OVER_SSL, tls);
+      |                                  ~                                 ^~
+      |                                                                    )
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:307:5: error: unknown type name 'esp_http_client_event_handler_t'
+  307 |     esp_http_client_event_handler_t event_handler = {};
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:308:18: error: request for member 'on_event' in something not a structure or union
+  308 |     event_handler.on_event = http_event_handler;
+      |                  ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:308:30: error: 'http_event_handler' undeclared (first use in this function); did you mean 'event_handler'?
+  308 |     event_handler.on_event = http_event_handler;
+      |                              ^~~~~~~~~~~~~~~~~~
+      |                              event_handler
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:309:18: error: request for member 'user_data' in something not a structure or union
+  309 |     event_handler.user_data = NULL;
+      |                  ^
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:310:5: error: implicit declaration of function 'esp_http_client_register_events' [-Wimplicit-function-declaration]
+  310 |     esp_http_client_register_events(client, &event_handler, http_events, sizeof(http_events));
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:310:61: error: 'http_events' undeclared (first use in this function)
+  310 |     esp_http_client_register_events(client, &event_handler, http_events, sizeof(http_events));
+      |                                                             ^~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:313:21: error: implicit declaration of function 'esp_http_client_set_url' [-Wimplicit-function-declaration]
+  313 |     esp_err_t err = esp_http_client_set_url(client, url);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:317:9: error: implicit declaration of function 'esp_tls_destroy'; did you mean 'esp_tls_conn_destroy'? [-Wimplicit-function-declaration]
+  317 |         esp_tls_destroy(tls);
+      |         ^~~~~~~~~~~~~~~
+      |         esp_tls_conn_destroy
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:321:11: error: implicit declaration of function 'esp_http_client_set_method' [-Wimplicit-function-declaration]
+  321 |     err = esp_http_client_set_method(client, HTTP_METHOD_POST);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:330:11: error: implicit declaration of function 'esp_http_client_set_post_field' [-Wimplicit-function-declaration]
+  330 |     err = esp_http_client_set_post_field(client, body);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:340:11: error: implicit declaration of function 'esp_http_client_perform' [-Wimplicit-function-declaration]
+  340 |     err = esp_http_client_perform(client);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:344:22: error: implicit declaration of function 'esp_http_client_get_status_code' [-Wimplicit-function-declaration]
+  344 |         int status = esp_http_client_get_status_code(client);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:348:30: error: implicit declaration of function 'esp_http_client_get_content_length' [-Wimplicit-function-declaration]
+  348 |         int content_length = esp_http_client_get_content_length(client);
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:352:32: error: implicit declaration of function 'esp_http_client_read'; did you mean 'esp_tls_conn_read'? [-Wimplicit-function-declaration]
+  352 |                 int read_len = esp_http_client_read(client, *response, content_length);
+      |                                ^~~~~~~~~~~~~~~~~~~~
+      |                                esp_tls_conn_read
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c: At top level:
+I:/esp32/ghost/firmware_gateway/components/supabase_client/src/supabase_client.c:403:57: error: expected ';', ',' or ')' before ']' token
+  403 | esp_err_t supabase_send_event(const ghost_event_t *event]
+      |                                                         ^
+ninja: build stopped: subcommand failed.

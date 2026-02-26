@@ -1,0 +1,62 @@
+Command: C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe I:\esp32\v5.5.1\esp-idf\tools/idf_monitor.py -p com22 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 I:\esp32\ghost\firmware_gateway\build\firmware_gateway.elf I:\esp32\ghost\firmware_gateway\build\bootloader\bootloader.elf --force-color -m 'C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe' 'I:\esp32\v5.5.1\esp-idf\tools\idf.py'
+[0;33m--- esp-idf-monitor 1.9.0 on com22 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0m--- 0x40041a76: [0;33mets_delay_us[0m[0m in [0;32mROM[0m
+[1;31m--- Error: ClearCommError failed (PermissionError(13, 'El dispositivo no reconoce el comando.', None, 22))[0m
+[0;33m--- Waiting for the device to reconnect[0m[0;33m[0m
+[0m--- 0x4037e181: [0;33mpanic_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/panic.c[0m[0m:[1;31m469[0m
+[0m--- 0x4037e149: [0;33mesp_system_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/esp_system_chip.c[0m[0m:[1;31m87[0m
+[0m--- 0x4037f246: [0;33mvApplicationStackOverflowHook[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m563[0m
+[0m--- 0x40380bcb: [0;33mvTaskSwitchContext[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c[0m[0m:[1;31m3698[0m
+[0m--- 0x4037f30c: [0;33m_frxt_dispatch[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m451[0m
+[0m--- 0x4037f302: [0;33m_frxt_int_exit[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m246[0m
+[0m--- 0x4037e2d0: [0;33mesp_restart_noos[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m162[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m25[0m
+[0m--- 0x4037e181: [0;33mpanic_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/panic.c[0m[0m:[1;31m469[0m
+[0m--- 0x4037e149: [0;33mesp_system_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/esp_system_chip.c[0m[0m:[1;31m87[0m
+[0m--- 0x4037f246: [0;33mvApplicationStackOverflowHook[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m563[0m
+[0m--- 0x40380bcb: [0;33mvTaskSwitchContext[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c[0m[0m:[1;31m3698[0m
+[0m--- 0x4037f30c: [0;33m_frxt_dispatch[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m451[0m
+[0m--- 0x4037f302: [0;33m_frxt_int_exit[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m246[0m
+[0m--- 0x4037e2d0: [0;33mesp_restart_noos[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m162[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m25[0m
+[0m--- 0x4037e181: [0;33mpanic_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/panic.c[0m[0m:[1;31m469[0m
+[0m--- 0x4037e149: [0;33mesp_system_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/esp_system_chip.c[0m[0m:[1;31m87[0m
+[0m--- 0x4037f246: [0;33mvApplicationStackOverflowHook[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m563[0m
+[0m--- 0x40380bcb: [0;33mvTaskSwitchContext[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c[0m[0m:[1;31m3698[0m
+[0m--- 0x4037f30c: [0;33m_frxt_dispatch[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m451[0m
+[0m--- 0x4037f302: [0;33m_frxt_int_exit[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m246[0m
+[0m--- 0x4037e2d0: [0;33mesp_restart_noos[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m162[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m25[0m
+[0m--- 0x4037e181: [0;33mpanic_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/panic.c[0m[0m:[1;31m469[0m
+[0m--- 0x4037e149: [0;33mesp_system_abort[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/esp_system_chip.c[0m[0m:[1;31m87[0m
+[0m--- 0x4037f246: [0;33mvApplicationStackOverflowHook[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c[0m[0m:[1;31m563[0m
+[0m--- 0x40380bcb: [0;33mvTaskSwitchContext[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c[0m[0m:[1;31m3698[0m
+[0m--- 0x4037f30c: [0;33m_frxt_dispatch[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m451[0m
+[0m--- 0x4037f302: [0;33m_frxt_int_exit[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S[0m[0m:[1;31m246[0m
+[0m--- 0x420784e3: [0;33mmpi_ll_write_to_mem_block[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/hal/esp32s3/include/hal/mpi_ll.h[0m[0m:[1;31m110[0m
+[0m--- 0x4037e2d0: [0;33mesp_restart_noos[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c[0m[0m:[1;31m162[0m
+[0m--- 0x403c8700: [0;33m_stext[0m[0m at [0;32m??[0m[0m:[1;31m?[0m
+[0m--- 0x403c8924: [0;33mcall_start_cpu0[0m[0m at [0;32mI:/esp32/v5.5.1/esp-idf/components/bootloader/subproject/main/bootloader_start.c[0m[0m:[1;31m25[0m
+[0;33m--- To exit from IDF monitor please use "Ctrl+]". Alternatively, you can use Ctrl+T Ctrl+X to exit.[0m
+[0m
+Traceback (most recent call last):
+  File "I:\esp32\v5.5.1\esp-idf\tools/idf_monitor.py", line 11, in <module>
+    sys.exit(subprocess.run([sys.executable, '-m', 'esp_idf_monitor'] + sys.argv[1:]).returncode)
+             ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Luis\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Luis\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1214, in communicate
+    self.wait()
+    ~~~~~~~~~^^
+  File "C:\Users\Luis\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1277, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Luis\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1603, in _wait
+    result = _winapi.WaitForSingleObject(self._handle,
+                                         timeout_millis)
+KeyboardInterrupt

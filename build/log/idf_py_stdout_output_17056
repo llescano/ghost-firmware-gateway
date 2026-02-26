@@ -1,0 +1,377 @@
+Command: C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe I:\esp32\v5.5.1\esp-idf\tools/idf_monitor.py -p com22 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 I:\esp32\ghost\firmware_gateway\build\firmware_gateway.elf I:\esp32\ghost\firmware_gateway\build\bootloader\bootloader.elf --force-color -m 'C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe' 'I:\esp32\v5.5.1\esp-idf\tools\idf.py'
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x0 (DOWNLOAD(USB/UART0))
+Saved PC:0x40041a76
+waiting for download
+[0;32mI (271) esp_image: segment 4: paddr=00102234 vaddr=40375168 sizeI (328) cpu_start: Pro cpu start user code[0m
+[0;32mI (328) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (328) app_init: Application information:[0m
+[0;32mI (328) app_init: Project name:     firmware_gateway[0m
+[0;32mI (332) app_init: App version:      1[0m
+[0;32mI (336) app_init: Compile time:     Feb 26 2026 15:41:56[0m
+[0;32mI (341) app_init: ELF file SHA256:  a9075a72b...[0m
+[0;32mI (345) app_init: ESP-IDF:          v5.5.1-dirty[0m
+[0;32mI (349) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (353) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (357) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (361) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (367) heap_init: At 3FCA7550 len 000421C0 (264 KiB): RAM[0m
+[0;32mI (373) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (378) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (383) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (389) spi_flash: detected chip: generic[0m
+[0;32mI (392) spi_flash: flash io: dio[0m
+[0;32mI (395) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (401) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (408) main_task: Started on CPU0[0m
+[0;32mI (411) main_task: Calling app_main()[0m
+[0;32mI (414) GATEWAY_MAIN: ========================================[0m
+[0;32mI (420) GATEWAY_MAIN:   GHOST - Gateway de Seguridad[0m
+[0;32mI (424) GATEWAY_MAIN:   Target: ESP32-S3-Zero[0m
+[0;32mI (428) GATEWAY_MAIN: ========================================[0m
+[0;32mI (461) GATEWAY_MAIN: NVS inicializado correctamente[0m
+[0;32mI (461) GATEWAY_MAIN: Inicializando UI...[0m
+[0;32mI (462) UI: Inicializando módulo de UI[0m
+[0;32mI (462) led_strips: LED Indicator Version: 2.1.1[0m
+[0;32mI (468) led_strips: Indicator create successfully. type:LED Strips mode, hardware_data:0x3fce9c24, blink_lists:custom[0m
+[0;32mI (477) UI: Indicador LED WS2812 creado en GPIO 21[0m
+[0;32mI (482) button: IoT Button Version: 4.1.5[0m
+[0;32mI (485) UI: Botón BOOT configurado en GPIO 0[0m
+[0;32mI (489) UI: Módulo de UI inicializado[0m
+[0;32mI (493) GATEWAY_MAIN: Inicializando controlador...[0m
+[0;32mI (497) CTRL: Inicializando controlador[0m
+[0;32mI (501) CTRL: Boot mode: LAST_STATE (restaurando 1)[0m
+[0;32mI (505) CTRL: Tarea del controlador iniciada[0m
+[0;32mI (509) CTRL: Controlador inicializado - Estado: 1[0m
+[0;32mI (514) UI: Callback de click configurado[0m
+[0;32mI (517) UI: Callback de long press configurado[0m
+[0;32mI (522) GATEWAY_MAIN: Inicializando WiFi Manager...[0m
+[0;32mI (527) wifi_manager: Creando netif STA...[0m
+[0;32mI (531) pp: pp rom version: e7ae62f[0m
+[0;32mI (534) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (539) wifi:wifi driver task: 3fcb1770, prio:23, stack:6656, core=0[0m
+[0;32mI (560) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (561) wifi:wifi certification version: v7.0[0m
+[0;32mI (561) wifi:config NVS flash: enabled[0m
+[0;32mI (561) wifi:config nano formatting: disabled[0m
+[0;32mI (565) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (570) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (574) wifi:Init management short buffer num: 32[0m
+[0;32mI (578) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (582) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (586) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (590) wifi:Init static rx buffer num: 10[0m
+[0;32mI (594) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (599) wifi_init: rx ba win: 6[0m
+[0;32mI (601) wifi_init: accept mbox: 6[0m
+[0;32mI (604) wifi_init: tcpip mbox: 32[0m
+[0;32mI (607) wifi_init: udp mbox: 6[0m
+[0;32mI (610) wifi_init: tcp mbox: 6[0m
+[0;32mI (612) wifi_init: tcp tx win: 5744[0m
+[0;32mI (616) wifi_init: tcp rx win: 5744[0m
+[0;32mI (619) wifi_init: tcp mss: 1436[0m
+[0;32mI (622) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (625) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (630) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10[0m
+[0;32mI (672) wifi:mode : sta (b8:f8:62:d7:5a:40)[0m
+[0;32mI (673) wifi:enable tsf[0m
+[0;32mI (675) wifi_manager: WiFi manager inicializado correctamente[0m
+[0;32mI (675) wifi_manager: WiFi STA iniciado[0m
+[0;32mI (677) GATEWAY_MAIN: Conectando a WiFi: Lescano-WiFi[0m
+[0;32mI (683) wifi_manager: Credenciales guardadas correctamente[0m
+[0;32mI (687) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (703) wifi:new:<5,0>, old:<1,0>, ap:<255,255>, sta:<5,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (704) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (717) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (724) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (742) wifi:<ba-add>idx:0 (ifx:0, e4:c3:2a:9d:5e:f8), tid:5, ssn:0, winSize:64[0m
+[0;32mI (835) wifi:connected with Lescano-WiFi, aid = 7, channel 5, BW20, bssid = e4:c3:2a:9d:5e:f8[0m
+[0;32mI (836) wifi:security: WPA2-PSK, phy: bgn, rssi: -73[0m
+[0;32mI (840) wifi:pm start, type: 1[0m
+
+[0;32mI (841) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (849) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (859) wifi_manager: Conectado al AP, esperando IP...[0m
+[0;32mI (862) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (893) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (1875) esp_netif_handlers: sta ip: 192.168.1.123, mask: 255.255.255.0, gw: 192.168.1.1[0m
+[0;32mI (1876) wifi_manager: IP obtenida: 192.168.1.123[0m
+[0;32mI (1877) GATEWAY_MAIN: WiFi state changed: 2[0m
+[0;32mI (1881) GATEWAY_MAIN: WiFi conectado! IP: 192.168.1.123[0m
+[0;32mI (1886) GATEWAY_MAIN: Inicializando SNTP...[0m
+[0;32mI (1890) SNTP_SYNC: Inicializando SNTP...[0m
+[0;32mI (1894) SNTP_SYNC: Zona horaria: UTC-3[0m
+[0;32mI (1897) SNTP_SYNC: Servidores NTP: south-america.pool.ntp.org, pool.ntp.org[0m
+[0;32mI (1904) SNTP_SYNC: ✅ SNTP inicializado correctamente[0m
+[0;32mI (1904) SNTP_SYNC: Tarea de sincronización iniciada[0m
+[0;32mI (1909) GATEWAY_MAIN: Inicializando cliente Supabase...[0m
+[0;32mI (1919) SUPABASE_CLIENT: Cliente Supabase inicializado[0m
+[0;32mI (1924) SUPABASE_CLIENT:   Host: ekwdgsgjtmhlvaiwfhuo.supabase.co:443[0m
+[0;32mI (1930) SUPABASE_CLIENT:   Path: /functions/v1/ghost-event-public[0m
+[0;32mI (1936) SUPABASE_CLIENT:   Device Key: ghost-gateway-001[0m
+[0;32mI (1941) GATEWAY_MAIN: Enviando evento de prueba a Supabase...[0m
+[0;32mI (1946) SUPABASE_CLIENT: Enviando evento: TEST[0m
+[0;32mI (1909) wifi_manager: Conectado a SSID: Lescano-WiFi[0m
+[0;32mI (1951) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (1959) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (1963) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (1968) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;33mW (1973) SUPABASE_CLIENT: SNTP no sincronizado, usando tiempo del sistema[0m
+[0;32mI (1979) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"TEST",
+	"payload":	{
+		"event_timestamp":	"1970-01-01T03:00:01Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY"
+	}
+}
+[0;32mI (1995) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (2007) GATEWAY_MAIN: Inicializando comunicación ESP-Now...[0m
+[0;32mI (2012) COMM: Inicializando módulo de comunicación[0m
+[0;32mI (2021) ESPNOW: espnow [version: 2.0] init[0m
+[0;32mI (2021) COMM: Comm processing task iniciada[0m
+[0;32mI (2022) COMM: Módulo de comunicación inicializado correctamente[0m
+[0;32mI (2028) wifi:<ba-add>idx:1 (ifx:0, e4:c3:2a:9d:5e:f8), tid:0, ssn:1, winSize:64[0m
+[0;32mI (2038) COMM: Gateway MAC: B8:F8:62:D7:5A:40[0m
+[0;32mI (2042) GATEWAY_MAIN: Estado inicial: 1[0m
+[0;32mI (2046) UI: Estado LED cambiado a: 1[0m
+[0;32mI (2053) GATEWAY_MAIN: Sistema iniciado correctamente[0m
+[0;32mI (2054) GATEWAY_MAIN: Esperando eventos de sensores...[0m
+[0;32mI (2059) GATEWAY_MAIN: Botón BOOT: click=toggle arm/desarm, long press=desarmar[0m
+[0;32mI (2066) main_task: Returned from app_main()[0m
+[0;32mI (2963) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (3689) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (3690) SUPABASE_CLIENT: Enviando petición HTTP (340 bytes)[0m
+[0;32mI (4583) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (4586) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (4586) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"903d258e-92ee-4efb-9ccb-59443c5d90be"}
+0
+
+
+[0;32mI (4591) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (4597) GATEWAY_MAIN: Evento de prueba enviado correctamente![0m
+[0;32mI (6220) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-26 21:51:28 UTC (sync #1)[0m
+[0;32mI (11850) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (11851) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (11851) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (11855) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (11858) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (11863) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (11866) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (11871) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (11875) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (11881) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:51:33Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (11908) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (12852) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (13517) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (13518) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (13994) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (13998) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (13998) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"62af25df-d630-4b39-9719-53aa4697989f"}
+0
+
+
+[0;32mI (14003) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (14009) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (14015) UI: Estado LED cambiado a: 0[0m
+[0;32mI (15830) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (15831) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (15831) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (15835) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (15838) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (15843) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (15846) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (15850) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (15855) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (15861) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:51:37Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (15888) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (16829) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (17488) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (17489) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (18293) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (18296) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (18296) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"592bdc12-3f11-4233-84a4-930db07ec833"}
+0
+
+
+[0;32mI (18301) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (18307) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (18313) UI: Estado LED cambiado a: 1[0m
+[0;32mI (20370) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (20371) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (20371) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (20375) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (20378) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (20383) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (20386) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (20391) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (20395) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (20401) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:51:42Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (20428) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (21377) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (22037) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (22038) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (22938) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (22941) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (22942) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"7674cee2-99a8-4107-9adc-c71113cd317c"}
+0
+
+
+[0;32mI (22947) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (22952) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (22958) UI: Estado LED cambiado a: 0[0m
+[0;32mI (28010) UI: Botón BOOT: long press detectado[0m
+[0;32mI (28011) GATEWAY_MAIN: Botón: Long press - Desarmando sistema[0m
+[0;32mI (28011) CTRL: 🔓 DESARMANDO sistema (de DESARMADO)[0m
+[0;32mI (28015) CTRL: Estado cambiado: DESARMADO -> DESARMADO[0m
+[0;32mI (28020) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (28024) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (28028) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (28032) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (28037) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (28042) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:51:49Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	0,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (28070) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (29014) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (29683) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (29684) SUPABASE_CLIENT: Enviando petición HTTP (477 bytes)[0m
+[0;32mI (30134) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (30137) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (30138) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"4ae378af-994e-4e7d-8173-f1e8526fc10f"}
+0
+
+
+[0;32mI (30143) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (30149) CTRL: ✅ Evento de estado enviado: DESARMADO -> DESARMADO[0m
+[0;32mI (30155) UI: Estado LED cambiado a: 0[0m
+[0;32mI (33170) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (33171) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (33171) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (33175) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (33178) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (33183) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (33186) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (33190) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (33195) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (33201) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:51:54Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (33228) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (34166) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (34820) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (34821) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (35189) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (35192) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (35193) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"2e04614a-a6ad-48a4-bafd-3317afba5cca"}
+0
+
+
+[0;32mI (35198) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (35203) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (35209) UI: Estado LED cambiado a: 1[0m
+[0;32mI (42095) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (42096) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (42096) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (42100) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (42103) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (42108) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (42111) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (42116) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (42120) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (42126) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T21:52:03Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (42153) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (43092) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (43749) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (43749) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (44619) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (44622) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (44622) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"4be7da2c-57e0-4e84-8bdd-4e012a7d413b"}
+0
+
+
+[0;32mI (44627) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (44633) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (44639) UI: Estado LED cambiado a: 0[0m

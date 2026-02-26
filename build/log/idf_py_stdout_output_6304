@@ -1,0 +1,16 @@
+Command: ninja all
+[0/1] Re-running CMake...
+-- Minimal build - OFF
+-- ccache will be used for faster recompilation
+-- git rev-parse returned 'fatal: not a git repository (or any of the parent directories): .git'
+-- Could not use 'git describe' to determine PROJECT_VER.
+-- Building ESP-IDF components for target esp32s3
+NOTICE: Processing 5 dependencies:
+NOTICE: [1/5] espressif/button (4.1.5)
+NOTICE: [2/5] espressif/cmake_utilities (1.1.1)
+NOTICE: [3/5] espressif/led_indicator (2.1.1)
+NOTICE: [4/5] espressif/led_strip (3.0.3)
+NOTICE: [5/5] idf (5.5.1)
+-- Configuring incomplete, errors occurred!
+FAILED: build.ninja 
+C:\Users\Luis\.espressif\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SI:\esp32\ghost\firmware_gateway -BI:\esp32\ghost\firmware_gateway\build

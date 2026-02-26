@@ -1,0 +1,12 @@
+Command: cmake -G Ninja -B I:\esp32\ghost\firmware_gateway\build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=C:\Users\Luis\.espressif\python_env\idf6.1_py3.13_env\Scripts\python.exe -DESP_PLATFORM=1 -DCCACHE_ENABLE=True I:\esp32\ghost\firmware_gateway
+CMake Error at I:/esp32/esp-idf/tools/cmake/build.cmake:378 (message):
+  Failed to resolve component 'json' required by component 'comm': unknown
+  name.
+Call Stack (most recent call first):
+  I:/esp32/esp-idf/tools/cmake/build.cmake:421 (__build_resolve_and_add_req)
+  I:/esp32/esp-idf/tools/cmake/build.cmake:422 (__build_expand_requirements)
+  I:/esp32/esp-idf/tools/cmake/build.cmake:751 (__build_expand_requirements)
+  I:/esp32/esp-idf/tools/cmake/project.cmake:742 (idf_build_process)
+  CMakeLists.txt:7 (project)
+
+
