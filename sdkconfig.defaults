@@ -53,5 +53,5 @@ CONFIG_MBEDTLS_HARDWARE_AES=y
 CONFIG_MBEDTLS_HARDWARE_SHA=y
 
 # === Ghost Development Mode ===
-# Reduce brillo de LEDs al 25% para desarrollo en escritorio
+# Reduce brillo de LEDs al 2% para desarrollo en escritorio
 CONFIG_GHOST_DEV_MODE=y

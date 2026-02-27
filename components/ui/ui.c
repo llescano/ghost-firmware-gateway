@@ -69,7 +69,7 @@ typedef enum {
 // ============================================================================
 
 #ifdef CONFIG_GHOST_DEV_MODE
-#define DEV_BRIGHTNESS  26  // 10% de 255
+#define DEV_BRIGHTNESS  2   // <1% de 255 (debug - ultra tenue)
 #else
 #define DEV_BRIGHTNESS  255  // Brillo completo para producción
 #endif

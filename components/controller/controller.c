@@ -292,11 +292,11 @@ esp_err_t controller_set_state(system_state_t state)
     save_state_to_nvs();
     ESP_LOGI(TAG, "Estado cambiado: %s -> %s", get_state_name(old_state), get_state_name(state));
 
-    // Enviar evento a Supabase
-    send_state_change_event(state, old_state);
-
-    // Actualizar LED según el nuevo estado
+    // Actualizar UI inmediatamente para feedback instantáneo al usuario
     ui_set_system_state(state);
+
+    // Enviar evento a Supabase (en background, no bloquea la UI)
+    send_state_change_event(state, old_state);
 
     return ESP_OK;
 }

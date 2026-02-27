@@ -22,7 +22,7 @@ extern "C" {
 // Contexto del cliente Supabase
 typedef struct {
     bool initialized;         /**< Cliente inicializado */
-    char host[128];          /**< Host de Supabase */
+    char host[128];           /**< Host de Supabase */
 } supabase_context_t;
 
 // Estructura de evento de dispositivo (compatible con edge function ghost-event-public)

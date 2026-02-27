@@ -102,6 +102,13 @@ static void on_state_event(const char *event, const char *payload, void *user_da
 {
     ESP_LOGI(TAG, "📥 Estado sinc recibido (system_events): %s", event);
 
+    // Log del payload completo para debug
+    char *payload_print = cJSON_Print(cJSON_Parse(payload));
+    if (payload_print) {
+        ESP_LOGI(TAG, "📋 Payload: %s", payload_print);
+        free(payload_print);
+    }
+
     // Solo procesar eventos INSERT
     if (strcmp(event, "INSERT") != 0) {
         return;

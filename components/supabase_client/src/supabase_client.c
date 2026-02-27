@@ -1,10 +1,10 @@
 /**
  * @file supabase_client.c
  * @brief Implementación del cliente HTTP para Supabase Edge Functions
- * 
+ *
  * Este módulo envía eventos al backend de Supabase mediante HTTP POST
  * a la Edge Function ghost-event-public.
- * 
+ *
  * Usa esp_tls directamente para control total sobre ALPN, SNI y
  * Certificate Bundle, requeridos por Cloudflare/Supabase.
  */
@@ -15,11 +15,19 @@
 #include "esp_tls.h"
 #include "esp_crt_bundle.h"
 #include "esp_netif.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
 #include "cJSON.h"
 #include <string.h>
 #include <time.h>
 
 static const char *TAG = "SUPABASE_CLIENT";
+
+// === CONFIGURACIÓN ===
+#define SUPABASE_CONNECT_TIMEOUT_MS 10000  // 10s timeout de conexión
+
+// Mutex para proteger las conexiones TLS
+static SemaphoreHandle_t s_tls_mutex = NULL;
 
 // === FUNCIÓN PRIVADA: Generar timestamp ISO 8601 ===
 /**
@@ -58,16 +66,16 @@ char *create_event_json(const device_event_t *event)
         ESP_LOGE(TAG, "Invalid event parameters");
         return NULL;
     }
-    
+
     cJSON *json = cJSON_CreateObject();
     if (json == NULL) {
         ESP_LOGE(TAG, "Failed to create JSON object");
         return NULL;
     }
-    
+
     // Campo obligatorio: event_type (fuera del payload)
     cJSON_AddStringToObject(json, "event_type", event->event_type);
-    
+
     // Crear objeto payload con todos los campos del evento
     cJSON *payload = cJSON_CreateObject();
     if (payload == NULL) {
@@ -75,7 +83,7 @@ char *create_event_json(const device_event_t *event)
         cJSON_Delete(json);
         return NULL;
     }
-    
+
     // Campo obligatorio: event_timestamp (dentro del payload)
     // Nota: La edge function ghost-event-public espera este campo dentro del payload
     if (event->event_timestamp != NULL) {
@@ -87,42 +95,42 @@ char *create_event_json(const device_event_t *event)
             free(timestamp);
         }
     }
-    
+
     // Campos opcionales dentro del payload
     // device_id y device_type son opcionales
     if (event->device_id != NULL) {
         cJSON_AddStringToObject(payload, "device_id", event->device_id);
     }
-    
+
     if (event->device_type != NULL) {
         cJSON_AddStringToObject(payload, "device_type", event->device_type);
     }
-    
+
     // presence (bool) - agregar solo si es true
     if (event->presence) {
         cJSON_AddBoolToObject(payload, "presence", event->presence);
     }
-    
+
     // distance_cm (float) - agregar solo si tiene valor positivo
     if (event->distance_cm > 0) {
         cJSON_AddNumberToObject(payload, "distance_cm", event->distance_cm);
     }
-    
+
     // direction (int) - agregar solo si es válido
     if (event->direction >= 0) {
         cJSON_AddNumberToObject(payload, "direction", event->direction);
     }
-    
+
     // behavior (int) - agregar solo si es válido
     if (event->behavior >= 0) {
         cJSON_AddNumberToObject(payload, "behavior", event->behavior);
     }
-    
+
     // active_zone (int) - agregar solo si es válido
     if (event->active_zone >= 0) {
         cJSON_AddNumberToObject(payload, "active_zone", event->active_zone);
     }
-    
+
     // energy_data (string JSON) - agregar solo si se proporciona
     if (event->energy_data != NULL) {
         // Intentar parsear como JSON para validar
@@ -134,14 +142,14 @@ char *create_event_json(const device_event_t *event)
             ESP_LOGW(TAG, "Invalid energy_data JSON string, skipping");
         }
     }
-    
+
     // Agregar payload al objeto principal
     cJSON_AddItemToObject(json, "payload", payload);
-    
+
     // Convertir a string
     char *json_str = cJSON_Print(json);
     cJSON_Delete(json);
-    
+
     return json_str;
 }
 
@@ -170,67 +178,141 @@ static esp_err_t send_http_request(esp_tls_t *tls, const char *host, const char 
         "\r\n"
         "%s",
         path, host, device_key, (int)strlen(json_body), json_body);
-    
+
     if (request_len >= sizeof(request)) {
         ESP_LOGE(TAG, "Petición HTTP demasiado grande");
         return ESP_ERR_NO_MEM;
     }
-    
+
     ESP_LOGI(TAG, "Enviando petición HTTP (%d bytes)", request_len);
     ESP_LOGD(TAG, "Request:\n%s", request);
-    
+
     // Enviar petición
     int written = esp_tls_conn_write(tls, request, request_len);
     if (written < 0) {
         ESP_LOGE(TAG, "Error al escribir en conexión TLS: %d", written);
         return ESP_FAIL;
     }
-    
+
     if (written != request_len) {
         ESP_LOGW(TAG, "Escritos %d de %d bytes", written, request_len);
     }
-    
+
     return ESP_OK;
 }
 
 /**
- * @brief Lee la respuesta HTTP del servidor
+ * @brief Lee la respuesta HTTP del servidor con Content-Length
  */
 static esp_err_t read_http_response(esp_tls_t *tls, int *http_status, char *body, size_t body_size)
 {
     char buffer[SUPABASE_RESPONSE_BUF_SIZE];
     int total_read = 0;
     int ret;
-    
-    // Leer respuesta con timeout
-    while ((ret = esp_tls_conn_read(tls, buffer + total_read, sizeof(buffer) - total_read - 1)) > 0) {
-        total_read += ret;
-        if (total_read >= sizeof(buffer) - 1) {
+    int content_length = -1;
+    bool headers_complete = false;
+    int empty_reads = 0;
+    const int MAX_EMPTY_READS = 10;  // Límite de reads vacíos para evitar loop infinito
+
+    // Fase 1: Leer hasta tener headers completos (\r\n\r\n)
+    while (!headers_complete && total_read < sizeof(buffer) - 1) {
+        ret = esp_tls_conn_read(tls, buffer + total_read, sizeof(buffer) - total_read - 1);
+
+        if (ret > 0) {
+            total_read += ret;
+            buffer[total_read] = '\0';
+            empty_reads = 0;  // Reset contador
+
+            // Buscar fin de headers
+            char *headers_end = strstr(buffer, "\r\n\r\n");
+            if (headers_end != NULL) {
+                headers_complete = true;
+
+                // Parsear Content-Length si existe
+                char *content_len_str = strstr(buffer, "\r\nContent-Length:");
+                if (content_len_str) {
+                    sscanf(content_len_str + 18, "%d", &content_length);
+                    ESP_LOGD(TAG, "Content-Length: %d", content_length);
+                }
+            }
+        } else if (ret == 0) {
+            // Conexión cerrada por servidor
+            ESP_LOGD(TAG, "Conexión cerrada por servidor");
             break;
+        } else if (ret == ESP_TLS_ERR_SSL_WANT_READ || ret == ESP_TLS_ERR_SSL_WANT_WRITE) {
+            // No hay datos disponibles todavía, continuar
+            empty_reads++;
+            if (empty_reads > MAX_EMPTY_READS) {
+                ESP_LOGW(TAG, "Timeout esperando headers");
+                break;
+            }
+            vTaskDelay(pdMS_TO_TICKS(10));  // Pequeña pausa
+            continue;
+        } else {
+            ESP_LOGE(TAG, "Error al leer respuesta TLS: %d", ret);
+            return ESP_FAIL;
         }
     }
-    
-    // Manejar errores TLS específicos que son normales en operaciones no bloqueantes
-    if (ret < 0 && ret != ESP_TLS_ERR_SSL_WANT_READ && ret != ESP_TLS_ERR_SSL_WANT_WRITE) {
-        ESP_LOGE(TAG, "Error al leer respuesta TLS: %d", ret);
-        return ESP_FAIL;
-    }
-    
+
     if (total_read == 0) {
         ESP_LOGE(TAG, "No se recibió respuesta del servidor");
         return ESP_FAIL;
     }
-    
+
+    if (!headers_complete) {
+        ESP_LOGE(TAG, "Headers incompletos recibidos (%d bytes)", total_read);
+        ESP_LOGD(TAG, "Response parcial:\n%.*s", total_read, buffer);
+    }
+
+    // Fase 2: Si tenemos Content-Length, leer el body completo
+    if (headers_complete && content_length > 0) {
+        char *body_start = strstr(buffer, "\r\n\r\n");
+        if (body_start) {
+            body_start += 4;
+            int headers_len = body_start - buffer;
+            int body_received = total_read - headers_len;
+
+            if (body_received < content_length) {
+                // Leer el resto del body
+                int remaining = content_length - body_received;
+                empty_reads = 0;
+
+                while (remaining > 0 && total_read < sizeof(buffer) - 1) {
+                    ret = esp_tls_conn_read(tls, buffer + total_read,
+                                           sizeof(buffer) - total_read - 1);
+                    if (ret > 0) {
+                        total_read += ret;
+                        remaining -= ret;
+                        empty_reads = 0;
+                    } else if (ret == 0) {
+                        break;  // Conexión cerrada
+                    } else if (ret == ESP_TLS_ERR_SSL_WANT_READ || ret == ESP_TLS_ERR_SSL_WANT_WRITE) {
+                        empty_reads++;
+                        if (empty_reads > MAX_EMPTY_READS) {
+                            ESP_LOGW(TAG, "Timeout esperando body");
+                            break;
+                        }
+                        vTaskDelay(pdMS_TO_TICKS(10));
+                        continue;
+                    } else {
+                        ESP_LOGE(TAG, "Error leyendo body: %d", ret);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     buffer[total_read] = '\0';
     ESP_LOGI(TAG, "Respuesta recibida (%d bytes)", total_read);
     ESP_LOGD(TAG, "Response:\n%s", buffer);
-    
+
     // Parsear status code HTTP
     if (sscanf(buffer, "HTTP/1.%*d %d", http_status) != 1) {
-        ESP_LOGE(TAG, "No se pudo parsear status code HTTP");
+        ESP_LOGE(TAG, "No se pudo parsear status code HTTP. Buffer: %.*s", total_read, buffer);
         return ESP_FAIL;
     }
-    
+
     // Buscar el body (después de \r\n\r\n)
     char *body_start = strstr(buffer, "\r\n\r\n");
     if (body_start && body) {
@@ -238,7 +320,7 @@ static esp_err_t read_http_response(esp_tls_t *tls, int *http_status, char *body
         strncpy(body, body_start, body_size - 1);
         body[body_size - 1] = '\0';
     }
-    
+
     return ESP_OK;
 }
 
@@ -248,12 +330,56 @@ static supabase_context_t s_ctx = {
     .host = SUPABASE_HOST,
 };
 
+// === FUNCIÓN PRIVADA: Crear conexión TLS ===
+/**
+ * @brief Crear nueva conexión TLS para cada request
+ * @return Puntero a la conexión TLS o NULL si error
+ *
+ * NOTA: No usamos keep-alive porque Supabase envía datos residuales
+ * con ~10s de delay que causan problemas al reusar la conexión.
+ */
+static esp_tls_t *create_connection(void)
+{
+    const char *alpn_protos[] = { "http/1.1", NULL };
+
+    esp_tls_cfg_t tls_cfg = {
+        .crt_bundle_attach = esp_crt_bundle_attach,
+        .common_name = SUPABASE_HOST,
+        .alpn_protos = alpn_protos,
+        .timeout_ms = SUPABASE_CONNECT_TIMEOUT_MS,
+    };
+
+    esp_tls_t *tls = esp_tls_init();
+    if (tls == NULL) {
+        ESP_LOGE(TAG, "Error al inicializar TLS");
+        return NULL;
+    }
+
+    int ret = esp_tls_conn_new_sync(s_ctx.host, strlen(s_ctx.host),
+                                     SUPABASE_PORT, &tls_cfg, tls);
+    if (ret != 1) {
+        ESP_LOGE(TAG, "Error en conexión TLS: %d", ret);
+        esp_tls_conn_destroy(tls);
+        return NULL;
+    }
+
+    ESP_LOGI(TAG, "✅ Conexión TLS establecida");
+    return tls;
+}
+
 // === FUNCIÓN PÚBLICA: Inicializar cliente ===
 esp_err_t supabase_client_init(void)
 {
     if (s_ctx.initialized) {
         ESP_LOGW(TAG, "Cliente ya inicializado");
         return ESP_OK;
+    }
+
+    // Crear mutex para proteger las conexiones TLS
+    s_tls_mutex = xSemaphoreCreateMutex();
+    if (s_tls_mutex == NULL) {
+        ESP_LOGE(TAG, "Error al crear mutex TLS");
+        return ESP_ERR_NO_MEM;
     }
 
     // Marcar como inicializado
@@ -263,6 +389,7 @@ esp_err_t supabase_client_init(void)
     ESP_LOGI(TAG, "  Host: %s:%d", s_ctx.host, SUPABASE_PORT);
     ESP_LOGI(TAG, "  Path: %s", SUPABASE_PATH);
     ESP_LOGI(TAG, "  Device Key: %s", DEVICE_KEY);
+    ESP_LOGI(TAG, "  Mode: Connection close (no keep-alive)");
 
     return ESP_OK;
 }
@@ -303,65 +430,50 @@ esp_err_t supabase_send_event(const device_event_t *event)
 
     ESP_LOGI(TAG, "JSON body: %s", json_str);
 
-    // Configurar TLS con ALPN (requerido por Cloudflare)
-    // ALPN protocolos: "http/1.1" para HTTP/1.1
-    const char *alpn_protos[] = { "http/1.1", NULL };
-    
-    esp_tls_cfg_t tls_cfg = {
-        .crt_bundle_attach = esp_crt_bundle_attach,
-        .common_name = SUPABASE_HOST,  // SNI - Server Name Indication
-        .alpn_protos = alpn_protos,    // ALPN para Cloudflare
-        .timeout_ms = SUPABASE_TIMEOUT_MS,
-    };
-    
-    ESP_LOGI(TAG, "Conectando a %s:%d (SNI=%s, ALPN=http/1.1)...", 
-             s_ctx.host, SUPABASE_PORT, tls_cfg.common_name);
-    
-    // Crear conexión TLS
-    esp_tls_t *tls = esp_tls_init();
-    if (tls == NULL) {
-        ESP_LOGE(TAG, "Error al inicializar TLS");
+    // Tomar mutex para acceso exclusivo
+    if (xSemaphoreTake(s_tls_mutex, pdMS_TO_TICKS(5000)) != pdTRUE) {
+        ESP_LOGE(TAG, "Timeout esperando mutex TLS");
         free(json_str);
-        return ESP_ERR_NO_MEM;
+        return ESP_ERR_TIMEOUT;
     }
-    
-    // Conectar al servidor
-    int ret = esp_tls_conn_new_sync(s_ctx.host, strlen(s_ctx.host),
-                                     SUPABASE_PORT, &tls_cfg, tls);
-    if (ret != 1) {
-        ESP_LOGE(TAG, "Error en conexión TLS: %d", ret);
-        esp_tls_conn_destroy(tls);
+
+    // Crear nueva conexión TLS para cada request
+    esp_tls_t *tls = create_connection();
+    if (tls == NULL) {
+        xSemaphoreGive(s_tls_mutex);
         free(json_str);
         return ESP_FAIL;
     }
-    
-    ESP_LOGI(TAG, "✅ Conexión TLS establecida");
-    
+
     // Enviar petición HTTP
     esp_err_t err = send_http_request(tls, s_ctx.host, SUPABASE_PATH,
                                        DEVICE_KEY, json_str);
     free(json_str);
-    
+
     if (err != ESP_OK) {
         esp_tls_conn_destroy(tls);
+        xSemaphoreGive(s_tls_mutex);
         return err;
     }
-    
+
     // Leer respuesta
     int http_status = 0;
     char response_body[SUPABASE_RESPONSE_BUF_SIZE] = {0};
     err = read_http_response(tls, &http_status, response_body, sizeof(response_body));
+
+    // Cerrar conexión
     esp_tls_conn_destroy(tls);
-    
+    xSemaphoreGive(s_tls_mutex);
+
     if (err != ESP_OK) {
         return err;
     }
-    
+
     ESP_LOGI(TAG, "HTTP Status: %d", http_status);
     if (strlen(response_body) > 0) {
         ESP_LOGI(TAG, "Respuesta: %s", response_body);
     }
-    
+
     // Considerar exitoso si el status es 2xx
     if (http_status >= 200 && http_status < 300) {
         ESP_LOGI(TAG, "✅ Evento enviado correctamente");
