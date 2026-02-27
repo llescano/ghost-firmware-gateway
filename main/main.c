@@ -22,6 +22,8 @@
 #include "comm.h"
 #include "ui.h"
 #include "wifi_manager.h"
+#include "wifi_provisioner.h"
+#include "device_identity.h"
 #include "supabase_client.h"
 #include "sntp_sync.h"
 #include "realtime_commands.h"
@@ -32,15 +34,12 @@
 
 static const char *TAG = "GATEWAY_MAIN";
 
-// Credenciales WiFi para prueba de integración
-#define WIFI_SSID "Lescano-WiFi"
-#define WIFI_PASSWORD "20259738866"
-
 // ============================================================================
 // Variables estáticas
 // ============================================================================
 
 static bool s_wifi_connected = false;
+static bool s_provisioning_mode = false;
 
 // ============================================================================
 // Callbacks del botón BOOT
@@ -85,73 +84,113 @@ static void on_boot_button_long_press(void)
 
 /**
  * @brief Callback para cambios de estado WiFi
- * 
+ *
  * @param state Nuevo estado de conexión WiFi
  * @param ctx Contexto de usuario (no usado)
  */
 static void on_wifi_state_change(wifi_state_t state, void *ctx)
 {
     ESP_LOGI(TAG, "WiFi state changed: %d", state);
-    
+
     if (state == WIFI_STATE_CONNECTED) {
         s_wifi_connected = true;
-        
+
         char ip_str[16] = {0};
         if (wifi_manager_get_ip(ip_str) == ESP_OK) {
             ESP_LOGI(TAG, "WiFi conectado! IP: %s", ip_str);
         }
-        
-        // Inicializar SNTP para sincronización de hora
-        ESP_LOGI(TAG, "Inicializando SNTP...");
-        sntp_sync_init();
 
-        // Inicializar cliente Supabase después de conectar WiFi
-        ESP_LOGI(TAG, "Inicializando cliente Supabase...");
-        esp_err_t ret = supabase_client_init();
-        if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "Error inicializando Supabase client: %s", esp_err_to_name(ret));
-            return;
-        }
-        
-        // Enviar evento de prueba
-        ESP_LOGI(TAG, "Enviando evento de prueba a Supabase...");
-        
-        // Crear evento de prueba usando la estructura device_event_t
-        device_event_t test_event = {
-            .event_type = "TEST",
-            .event_timestamp = NULL,  // Se generará automáticamente
-            .device_id = "GATEWAY_001",
-            .device_type = "GATEWAY",
-            .presence = false,
-            .distance_cm = 0.0f,
-            .direction = -1,  // No válido
-            .behavior = -1,  // No válido
-            .active_zone = -1,  // No válido
-            .energy_data = NULL
-        };
-        
-        ret = supabase_send_event(&test_event);
-        if (ret == ESP_OK) {
-            ESP_LOGI(TAG, "Evento de prueba enviado correctamente!");
-        } else {
-            ESP_LOGE(TAG, "Error enviando evento: %s", esp_err_to_name(ret));
+        // Si estábamos en modo provisionamiento, detenerlo
+        if (s_provisioning_mode) {
+            ESP_LOGI(TAG, "Deteniendo modo provisionamiento...");
+            wifi_provisioner_stop();
+            s_provisioning_mode = false;
         }
 
-        // Inicializar comandos en tiempo real (WebSocket)
-        ESP_LOGI(TAG, "Inicializando comandos realtime (WebSocket)...");
-        ret = realtime_commands_init();
-        if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "Error inicializando realtime commands: %s", esp_err_to_name(ret));
-            // No crashear - el sistema puede funcionar sin comandos remotos
-        } else {
-            ESP_LOGI(TAG, "✅ Comandos realtime iniciados - WebSocket activo");
-        }
-        
+        // Inicializar servicios que requieren WiFi
+        init_wifi_services();
+
     } else if (state == WIFI_STATE_DISCONNECTED) {
         s_wifi_connected = false;
         ESP_LOGW(TAG, "WiFi desconectado");
     } else if (state == WIFI_STATE_ERROR) {
         ESP_LOGE(TAG, "Error de conexión WiFi");
+    }
+}
+
+/**
+ * @brief Callback para eventos del provisionador
+ *
+ * @param state Nuevo estado del provisionador
+ * @param ctx Contexto de usuario (no usado)
+ */
+static void on_provisioner_event(prov_state_t state, void *ctx)
+{
+    ESP_LOGI(TAG, "Provisioner state: %d", state);
+
+    if (state == PROV_STATE_CONNECTED) {
+        ESP_LOGI(TAG, "✅ WiFi configurado exitosamente!");
+        // El provisionador se detendrá automáticamente en on_wifi_state_change
+    } else if (state == PROV_STATE_FAILED) {
+        ESP_LOGW(TAG, "Falló la conexión WiFi");
+        // El portal sigue disponible para reintentar
+    }
+}
+
+/**
+ * @brief Inicializa servicios que dependen de WiFi
+ *
+ * Se llama después de conectar exitosamente (con o sin provisionamiento)
+ */
+static void init_wifi_services(void)
+{
+    esp_err_t ret;
+
+    // Inicializar SNTP para sincronización de hora
+    ESP_LOGI(TAG, "Inicializando SNTP...");
+    sntp_sync_init();
+
+    // Inicializar cliente Supabase
+    ESP_LOGI(TAG, "Inicializando cliente Supabase...");
+    ret = supabase_client_init();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Error inicializando Supabase client: %s", esp_err_to_name(ret));
+        return;
+    }
+
+    // Enviar evento de dispositivo conectado
+    ESP_LOGI(TAG, "Enviando evento de conexión a Supabase...");
+
+    char device_id[DEVICE_ID_LEN];
+    device_identity_get_id(device_id);
+
+    device_event_t connect_event = {
+        .event_type = "DEVICE_ONLINE",
+        .event_timestamp = NULL,
+        .device_id = device_id,
+        .device_type = "GATEWAY",
+        .presence = false,
+        .distance_cm = 0.0f,
+        .direction = -1,
+        .behavior = -1,
+        .active_zone = -1,
+        .energy_data = NULL
+    };
+
+    ret = supabase_send_event(&connect_event);
+    if (ret == ESP_OK) {
+        ESP_LOGI(TAG, "Evento de conexión enviado");
+    } else {
+        ESP_LOGE(TAG, "Error enviando evento: %s", esp_err_to_name(ret));
+    }
+
+    // Inicializar comandos en tiempo real (WebSocket)
+    ESP_LOGI(TAG, "Inicializando comandos realtime (WebSocket)...");
+    ret = realtime_commands_init();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Error inicializando realtime commands: %s", esp_err_to_name(ret));
+    } else {
+        ESP_LOGI(TAG, "✅ Comandos realtime iniciados - WebSocket activo");
     }
 }
 
@@ -199,56 +238,84 @@ void app_main(void)
     ESP_LOGI(TAG, "  GHOST - Gateway de Seguridad");
     ESP_LOGI(TAG, "  Target: ESP32-S3-Zero");
     ESP_LOGI(TAG, "========================================");
-    
+
     // 1. Inicializar NVS
     ESP_ERROR_CHECK(init_nvs());
-    
-    // 2. Inicializar UI (LED indicador)
-    //    Se inicializa primero para dar feedback visual durante el boot
+
+    // 2. Inicializar identidad del dispositivo
+    ESP_LOGI(TAG, "Inicializando identidad del dispositivo...");
+    ESP_ERROR_CHECK(device_identity_init());
+
+    char device_id[DEVICE_ID_LEN];
+    device_identity_get_id(device_id);
+    ESP_LOGI(TAG, "Device ID: %s", device_id);
+
+    // 3. Inicializar UI (LED indicador)
     ESP_LOGI(TAG, "Inicializando UI...");
     ESP_ERROR_CHECK(ui_init());
-    
-    // 3. Inicializar controlador
-    //    Crea la cola de mensajes, carga estado desde NVS, crea tarea
+
+    // 4. Inicializar controlador
     ESP_LOGI(TAG, "Inicializando controlador...");
     ESP_ERROR_CHECK(controller_init());
-    
-    // 4. Configurar callbacks del botón BOOT
+
+    // 5. Configurar callbacks del botón BOOT
     ui_set_button_click_callback(on_boot_button_click);
     ui_set_button_long_press_callback(on_boot_button_long_press);
-    
-    // 5. Inicializar WiFi Manager PRIMERO
-    //    Esto asegura que los handlers de eventos WiFi se registren correctamente
-    //    antes de que comm/ESP-Now inicialice WiFi
+
+    // 6. Inicializar WiFi Manager
     ESP_LOGI(TAG, "Inicializando WiFi Manager...");
     ESP_ERROR_CHECK(wifi_manager_init());
-    
-    // 6. Registrar callback de WiFi
+
+    // 7. Registrar callback de WiFi
     wifi_manager_set_callback(on_wifi_state_change, NULL);
-    
-    // 7. Conectar a WiFi
-    ESP_LOGI(TAG, "Conectando a WiFi: %s", WIFI_SSID);
-    esp_err_t ret = wifi_manager_connect(WIFI_SSID, WIFI_PASSWORD);
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "No se pudo conectar a WiFi. Continuando en modo offline...");
-        // No crashear - el sistema puede funcionar sin backend
-        // ESP-Now seguirá funcionando para comunicación local
+
+    // 8. Verificar si el dispositivo está provisionado
+    if (!device_identity_is_provisioned()) {
+        // Modo PROVISIONAMIENTO: iniciar SoftAP con portal cautivo
+        ESP_LOGI(TAG, "");
+        ESP_LOGI(TAG, "📱 Dispositivo no provisionado - Iniciando modo setup");
+        ESP_LOGI(TAG, "");
+
+        ESP_ERROR_CHECK(wifi_provisioner_init());
+        ESP_ERROR_CHECK(wifi_provisioner_start(on_provisioner_event, NULL));
+
+        s_provisioning_mode = true;
+
+        char ap_ssid[32];
+        wifi_provisioner_get_ap_ssid(ap_ssid);
+        ESP_LOGI(TAG, "========================================");
+        ESP_LOGI(TAG, "  MODO PROVISIONAMIENTO ACTIVO");
+        ESP_LOGI(TAG, "========================================");
+        ESP_LOGI(TAG, "  SSID: %s", ap_ssid);
+        ESP_LOGI(TAG, "  IP: %s", wifi_provisioner_get_ap_ip());
+        ESP_LOGI(TAG, "========================================");
+        ESP_LOGI(TAG, "");
+        ESP_LOGI(TAG, "1. Conéctate a la red WiFi arriba indicada");
+        ESP_LOGI(TAG, "2. Se abrirá automáticamente el portal de configuración");
+        ESP_LOGI(TAG, "3. Selecciona tu red WiFi e ingresa la contraseña");
+        ESP_LOGI(TAG, "4. Escanea el QR para vincular el dispositivo");
+        ESP_LOGI(TAG, "");
+
+    } else {
+        // MODO NORMAL: conectar con credenciales guardadas
+        ESP_LOGI(TAG, "Dispositivo provisionado - Conectando con credenciales guardadas...");
+        esp_err_t ret = wifi_manager_connect_saved();
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "No se pudo conectar con credenciales guardadas: %s", esp_err_to_name(ret));
+            ESP_LOGI(TAG, "Podría ser necesario resetear la configuración...");
+            // No iniciar modo AP automáticamente - podría ser un problema temporal
+        }
     }
-    
-    // 8. Inicializar comunicación ESP-Now
-    //    Requiere que controller_queue esté creado y WiFi esté inicializado
+
+    // 9. Inicializar comunicación ESP-Now
     ESP_LOGI(TAG, "Inicializando comunicación ESP-Now...");
     ESP_ERROR_CHECK(comm_init());
-    
-    // 9. Actualizar LED según estado inicial
+
+    // 10. Actualizar LED según estado inicial
     system_state_t initial_state = controller_get_state();
     ESP_LOGI(TAG, "Estado inicial: %d", initial_state);
     ui_set_system_state(initial_state);
-    
+
     ESP_LOGI(TAG, "Sistema iniciado correctamente");
-    ESP_LOGI(TAG, "Esperando eventos de sensores...");
     ESP_LOGI(TAG, "Botón BOOT: click=toggle arm/desarm, long press=desarmar");
-    
-    // app_main retorna y el scheduler de FreeRTOS toma el control
-    // Las tareas de controller y comm se ejecutan en sus propios componentes
 }

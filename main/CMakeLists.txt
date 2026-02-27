@@ -3,4 +3,4 @@
 
 idf_component_register(SRCS "main.c"
                        INCLUDE_DIRS "includes"
-                       REQUIRES controller comm ui nvs_flash esp_wifi esp_driver_gpio wifi_manager supabase_client realtime_commands)
+                       REQUIRES controller comm ui nvs_flash esp_wifi esp_driver_gpio wifi_manager wifi_provisioner device_identity supabase_client realtime_commands)
