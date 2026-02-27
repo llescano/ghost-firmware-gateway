@@ -64,12 +64,12 @@ typedef enum {
 //
 // Para producción: comentar CONFIG_GHOST_DEV_MODE en sdkconfig
 //
-// Modo desarrollo:  brillo al 25% (DEV_BRIGHTNESS = 64)
+// Modo desarrollo:  brillo al 10% (DEV_BRIGHTNESS = 26)
 // Modo producción:    brillo al 100% (DEV_BRIGHTNESS = 255)
 // ============================================================================
 
 #ifdef CONFIG_GHOST_DEV_MODE
-#define DEV_BRIGHTNESS  64  // 25% de 255
+#define DEV_BRIGHTNESS  26  // 10% de 255
 #else
 #define DEV_BRIGHTNESS  255  // Brillo completo para producción
 #endif

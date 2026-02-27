@@ -228,7 +228,7 @@ esp_err_t sntp_sync_get_time_str(char *buf, size_t size)
     time_t now;
     time(&now);
     struct tm timeinfo;
-    localtime_r(&now, &timeinfo);
+    gmtime_r(&now, &timeinfo);  // Usar gmtime_r para obtener UTC real
 
     strftime(buf, size, "%Y-%m-%dT%H:%M:%SZ", &timeinfo);
 

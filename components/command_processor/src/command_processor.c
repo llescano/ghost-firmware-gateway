@@ -39,9 +39,9 @@ static esp_err_t process_command(const char *command_id, const char *command_str
         // Enviar mensaje de armado al controller
         controller_message_t msg = {
             .header = {
+                .version = 1,
                 .src_id = "CMD_PROC",
-                .dst_id = "CTRL",
-                .timestamp = esp_timer_get_time() / 1000
+                .src_type = DEV_TYPE_GATEWAY
             },
             .payload = {
                 .type = MSG_TYPE_ARM_COMMAND
@@ -60,9 +60,9 @@ static esp_err_t process_command(const char *command_id, const char *command_str
         // Enviar mensaje de desarmado
         controller_message_t msg = {
             .header = {
+                .version = 1,
                 .src_id = "CMD_PROC",
-                .dst_id = "CTRL",
-                .timestamp = esp_timer_get_time() / 1000
+                .src_type = DEV_TYPE_GATEWAY
             },
             .payload = {
                 .type = MSG_TYPE_DISARM_COMMAND

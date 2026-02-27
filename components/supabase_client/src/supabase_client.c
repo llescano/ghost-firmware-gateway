@@ -44,7 +44,7 @@ static char *generate_timestamp(void)
     // Fallback: usar tiempo del sistema (puede no estar sincronizado)
     time_t now = time(NULL);
     struct tm timeinfo = {0};
-    localtime_r(&now, &timeinfo);
+    gmtime_r(&now, &timeinfo);  // Usar gmtime_r para obtener UTC real
     strftime(timestamp, 32, "%Y-%m-%dT%H:%M:%SZ", &timeinfo);
 
     ESP_LOGW(TAG, "SNTP no sincronizado, usando tiempo del sistema");

@@ -2238,6 +2238,12 @@ CONFIG_WIFI_PROV_STA_ALL_CHANNEL_SCAN=y
 # end of Wi-Fi Provisioning Manager
 
 #
+# ESP WebSocket client
+#
+# CONFIG_ESP_WS_CLIENT_ENABLE_DYNAMIC_BUFFER is not set
+# end of ESP WebSocket client
+
+#
 # IoT Button
 #
 CONFIG_BUTTON_PERIOD_TIME_MS=5
@@ -2485,13 +2491,4 @@ CONFIG_SPI_FLASH_WRITING_DANGEROUS_REGIONS_ABORTS=y
 CONFIG_SUPPRESS_SELECT_DEBUG_OUTPUT=y
 CONFIG_SUPPORT_TERMIOS=y
 CONFIG_SEMIHOSTFS_MAX_MOUNT_POINTS=1
-
-# Ghost System - Development Mode
-#
-# Brillo de LED reducido al 25% para prototipado en escritorio.
-# Para producción: comentar esta línea para brillo al 100%.
-#
-# CONFIG_GHOST_DEV_MODE=y
-CONFIG_GHOST_DEV_MODE=y
-
 # End of deprecated options

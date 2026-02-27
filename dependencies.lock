@@ -58,6 +58,7 @@ dependencies:
 direct_dependencies:
 - espressif/button
 - espressif/led_indicator
-manifest_hash: 1233fde45216ed03b489fb784f3c7a3b20bc525ff0befa3405f4605a8a5cc17d
+- idf
+manifest_hash: 92debf8192b98be5fdb3010421e8f59fabd0d1a26bad5d1154f051a9b0a69b83
 target: esp32s3
 version: 2.0.0

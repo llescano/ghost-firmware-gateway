@@ -61,6 +61,19 @@ esp_err_t phoenix_disconnect(void);
 esp_err_t phoenix_subscribe(const char *topic, phoenix_event_callback_t callback, void *user_data);
 
 /**
+ * @brief Suscribe a un canal Supabase Postgres Changes
+ *
+ * @param schema Nombre del schema (ej: "public")
+ * @param table Nombre de la tabla (ej: "system_commands")
+ * @param event Tipo de evento (ej: "INSERT", "UPDATE", "*")
+ * @param callback Callback para eventos del canal
+ * @param user_data Datos de usuario para el callback
+ * @return ESP_OK si la suscripción se inició correctamente
+ */
+esp_err_t phoenix_subscribe_postgres(const char *schema, const char *table, const char *event,
+                                      phoenix_event_callback_t callback, void *user_data);
+
+/**
  * @brief Envia un evento al canal
  *
  * @param topic Topic del canal

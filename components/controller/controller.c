@@ -232,10 +232,11 @@ esp_err_t controller_init(void)
     }
     
     // Crear tarea del controlador
+    // Stack aumentado a 8KB para evitar overflow durante HTTP/TLS
     BaseType_t ret = xTaskCreate(
         controller_task,
         "controller",
-        4096,
+        8192,
         NULL,
         5,
         &s_controller_task_handle
