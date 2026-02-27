@@ -55,12 +55,23 @@ typedef enum {
  */
 #define PACK_RGB(index, r, g, b) (((index) << 24) | ((r) << 16) | ((g) << 8) | (b))
 
+// ============================================================================
+// Configuración de brillo para desarrollo
+// ============================================================================
+
+#ifdef CONFIG_GHOST_DEV_MODE
+// Modo desarrollo: brillo al 25% para no cegar en el escritorio
+#define DEV_BRIGHTNESS  64  // 25% de 255
+#else
+#define DEV_BRIGHTNESS  255  // Brillo completo para producción
+#endif
+
 // Colores HSV predefinidos (H: 0-360, S: 0-255, V: 0-255)
-#define HSV_RED     PACK_HSV(0, 0,   255, 255)   // Rojo
-#define HSV_GREEN   PACK_HSV(0, 120, 255, 255)   // Verde
-#define HSV_BLUE    PACK_HSV(0, 240, 255, 255)   // Azul
-#define HSV_YELLOW  PACK_HSV(0, 60,  255, 255)   // Amarillo
-#define HSV_OFF     PACK_HSV(0, 0,   0,   0)     // Apagado
+#define HSV_RED     PACK_HSV(0, 0,   255, DEV_BRIGHTNESS)   // Rojo
+#define HSV_GREEN   PACK_HSV(0, 120, 255, DEV_BRIGHTNESS)   // Verde
+#define HSV_BLUE    PACK_HSV(0, 240, 255, DEV_BRIGHTNESS)   // Azul
+#define HSV_YELLOW  PACK_HSV(0, 60,  255, DEV_BRIGHTNESS)   // Amarillo
+#define HSV_OFF     PACK_HSV(0, 0,   0,   0)               // Apagado
 
 // ============================================================================
 // Configuración del botón
