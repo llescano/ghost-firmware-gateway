@@ -2487,6 +2487,11 @@ CONFIG_SUPPORT_TERMIOS=y
 CONFIG_SEMIHOSTFS_MAX_MOUNT_POINTS=1
 
 # Ghost System - Development Mode
+#
+# Brillo de LED reducido al 25% para prototipado en escritorio.
+# Para producción: comentar esta línea para brillo al 100%.
+#
+# CONFIG_GHOST_DEV_MODE=y
 CONFIG_GHOST_DEV_MODE=y
 
 # End of deprecated options

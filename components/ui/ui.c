@@ -58,9 +58,17 @@ typedef enum {
 // ============================================================================
 // Configuración de brillo para desarrollo
 // ============================================================================
+//
+// Durante desarrollo, los LEDs en las placas prototipo son muy intensos.
+// Usamos CONFIG_GHOST_DEV_MODE=y en sdkconfig para reducir el brillo al 25%.
+//
+// Para producción: comentar CONFIG_GHOST_DEV_MODE en sdkconfig
+//
+// Modo desarrollo:  brillo al 25% (DEV_BRIGHTNESS = 64)
+// Modo producción:    brillo al 100% (DEV_BRIGHTNESS = 255)
+// ============================================================================
 
 #ifdef CONFIG_GHOST_DEV_MODE
-// Modo desarrollo: brillo al 25% para no cegar en el escritorio
 #define DEV_BRIGHTNESS  64  // 25% de 255
 #else
 #define DEV_BRIGHTNESS  255  // Brillo completo para producción
