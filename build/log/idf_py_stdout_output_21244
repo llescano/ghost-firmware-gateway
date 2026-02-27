@@ -294,4 +294,508 @@ waiting for download
 [0;32mI (2208710) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
 [0;32mI (2209655) esp-x509-crt-bundle: Certificate validated[0m
 [0;32mI (2210321) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
-[0;32mI (2
+[0;32mI (2210322) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (2211783) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (2211786) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (2211786) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"cdc8ffe9-f6b0-4d4a-a215-818010ee35a3"}
+0
+
+
+[0;32mI (2211792) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (2211798) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (2211804) UI: Estado LED cambiado a: 0[0m
+[0;32mI (2219490) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (2219491) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (2219491) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (2219495) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (2219499) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (2219504) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (2219507) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (2219512) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (2219516) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (2219522) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-26T23:34:39Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (2219550) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (2220490) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (2221163) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (2221164) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (2222038) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (2222040) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (2222041) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"ed289c5c-6434-4100-8b5a-42d9b384aef0"}
+0
+
+
+[0;32mI (2222047) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (2222053) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (2222059) UI: Estado LED cambiado a: 1[0m
+[0;32mI (3602868) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-26 23:57:42 UTC (sync #2)[0m
+[0;32mI (7146600) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (7146601) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (7146601) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (7146605) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (7146609) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (7146614) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (7146617) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (7146622) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (7146627) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (7146633) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T00:56:45Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (7146660) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (7147614) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (7148278) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (7148279) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (7149549) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (7149551) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (7149552) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"950ec1e3-40b5-4841-92dd-f98d6aea51d6"}
+0
+
+
+[0;32mI (7149558) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (7149563) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (7149570) UI: Estado LED cambiado a: 0[0m
+[0;32mI (7166715) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (7166716) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (7166716) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (7166720) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (7166724) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (7166729) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (7166732) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (7166737) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (7166741) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (7166747) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T00:57:06Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (7166775) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (7167725) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (7168388) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (7168389) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (7169229) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (7169232) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (7169233) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"b5ceca42-4f3a-4efc-b92e-9969f9a697d2"}
+0
+
+
+[0;32mI (7169239) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (7169244) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (7169251) UI: Estado LED cambiado a: 1[0m
+[0;32mI (7202939) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-27 00:57:42 UTC (sync #3)[0m
+[0;32mI (7203505) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (7203506) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (7203506) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (7203510) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (7203514) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (7203519) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (7203522) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (7203527) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (7203532) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (7203538) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T00:57:42Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (7203565) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (7204509) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (7205170) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (7205171) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (7206067) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (7206069) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (7206070) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"d7d5b9d6-e3f4-4d0b-8dc6-8e55fc26912e"}
+0
+
+
+[0;32mI (7206076) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (7206081) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (7206088) UI: Estado LED cambiado a: 0[0m
+[0;32mI (7214980) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (7214981) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (7214981) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (7214985) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (7214989) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (7214994) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (7214997) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (7215002) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (7215006) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (7215012) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T00:57:54Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (7215040) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (7215981) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (7216641) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (7216641) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (7222135) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (7222137) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (7222138) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"35363d30-57cc-4665-b1e0-9a26fac63f11"}
+0
+
+
+[0;32mI (7222144) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (7222149) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (7222156) UI: Estado LED cambiado a: 1[0m
+[0;32mI (8647184) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (8647191) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (8767206) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (8767213) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (8887228) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (8887235) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (9565390) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (9565391) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (9565391) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (9565395) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (9565399) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (9565404) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (9565407) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (9565412) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (9565417) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (9565423) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T01:37:04Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (9565450) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (9566395) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (9567055) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (9567055) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (9568339) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (9568341) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (9568342) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"02c69d06-28d4-4633-96c3-d1b863539a68"}
+0
+
+
+[0;32mI (9568348) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (9568353) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (9568360) UI: Estado LED cambiado a: 0[0m
+[0;32mI (9571185) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (9571186) GATEWAY_MAIN: Botón: Armando sistema[0m
+[0;32mI (9571186) CTRL: 🔒 ARMANDO sistema (de DESARMADO)[0m
+[0;32mI (9571190) CTRL: Estado cambiado: DESARMADO -> ARMADO[0m
+[0;32mI (9571194) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (9571199) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (9571202) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (9571207) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (9571211) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (9571217) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T01:37:10Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"DESARMADO",
+			"new_state":	"ARMADO",
+			"old_state_code":	0,
+			"new_state_code":	1
+		}
+	}
+}
+[0;32mI (9571245) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (9572190) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (9572859) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (9572860) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (9573723) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (9573726) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (9573726) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"f8fae285-b2b5-4044-ab8c-f7f95358cdb2"}
+0
+
+
+[0;32mI (9573732) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (9573738) CTRL: ✅ Evento de estado enviado: DESARMADO -> ARMADO[0m
+[0;32mI (9573744) UI: Estado LED cambiado a: 1[0m
+[0;32mI (9587510) UI: Botón BOOT: click simple detectado[0m
+[0;32mI (9587511) GATEWAY_MAIN: Botón: Desarmando sistema[0m
+[0;32mI (9587511) CTRL: 🔓 DESARMANDO sistema (de ARMADO)[0m
+[0;32mI (9587515) CTRL: Estado cambiado: ARMADO -> DESARMADO[0m
+[0;32mI (9587519) SUPABASE_CLIENT: Enviando evento: state_change[0m
+[0;32mI (9587524) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (9587527) SUPABASE_CLIENT:   IP: 192.168.1.123[0m
+[0;32mI (9587532) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (9587537) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;32mI (9587543) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"state_change",
+	"payload":	{
+		"event_timestamp":	"2026-02-27T01:37:26Z",
+		"device_id":	"GATEWAY_001",
+		"device_type":	"GATEWAY",
+		"energy_data":	{
+			"old_state":	"ARMADO",
+			"new_state":	"DESARMADO",
+			"old_state_code":	1,
+			"new_state_code":	0
+		}
+	}
+}
+[0;32mI (9587570) SUPABASE_CLIENT: Conectando a ekwdgsgjtmhlvaiwfhuo.supabase.co:443 (SNI=ekwdgsgjtmhlvaiwfhuo.supabase.co, ALPN=http/1.1)...[0m
+[0;32mI (9588510) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (9589172) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (9589173) SUPABASE_CLIENT: Enviando petición HTTP (474 bytes)[0m
+[0;32mI (9590019) SUPABASE_CLIENT: Respuesta recibida (965 bytes)[0m
+[0;32mI (9590022) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (9590022) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"862f7733-e484-486a-89a2-991c5cb8fb4d"}
+0
+
+
+[0;32mI (9590028) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (9590034) CTRL: ✅ Evento de estado enviado: ARMADO -> DESARMADO[0m
+[0;32mI (9590040) UI: Estado LED cambiado a: 0[0m
+[0;32mI (9667372) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (9667380) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (9907417) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (9907424) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10327494) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10327502) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10387506) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10387513) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10507528) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10507535) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10627550) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10627557) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10687561) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10687568) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (10803018) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-27 01:57:42 UTC (sync #4)[0m
+[0;32mI (10867594) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (10867601) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (11107639) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (11107646) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (11647738) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (11647745) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (11707749) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (11707757) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (11947794) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (11947801) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (12907971) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (12907978) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (12967982) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (12967989) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (13088004) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (13088011) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (14403289) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-27 02:57:42 UTC (sync #5)[0m
+[0;32mI (15788503) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (15788510) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16268592) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16268599) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16448625) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16448632) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16508636) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16508643) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16688669) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16688676) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16748680) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16748688) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16808691) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16808699) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16928714) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16928721) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (16988725) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (16988732) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17048736) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17048743) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17108747) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17108754) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17168758) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17168765) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17228769) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17228776) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17528825) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17528832) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (17888891) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (17888898) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18003563) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-27 03:57:42 UTC (sync #6)[0m
+[0;32mI (18008913) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18008920) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18068924) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18068931) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18128935) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18128943) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18549013) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18549020) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18609024) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18609031) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18729046) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18729053) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18789057) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18789065) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (18909079) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (18909087) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19029102) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19029109) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19089113) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19089120) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19149124) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19149131) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19209135) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19209142) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19269146) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19269153) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19329157) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19329164) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19389168) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19389176) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19569201) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19569209) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19689224) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19689231) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19809246) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19809253) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19869257) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19869264) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19929268) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19929275) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (19989279) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (19989286) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20049290) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20049297) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20169312) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20169319) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20289334) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20289342) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20349346) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20349353) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20409357) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20409364) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20469368) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20469375) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20709412) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20709419) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20769423) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20769430) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (20889445) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (20889452) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (21129490) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (21129497) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (21189501) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (21189508) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (21249512) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (21249519) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (21309523) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (21309530) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (21603841) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-27 04:57:42 UTC (sync #7)[0m
+[0;32mI (21969645) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (21969652) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22029656) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22029663) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22149678) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22149685) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22209689) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22209696) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22509745) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22509752) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22569756) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22569763) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22689778) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22689785) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22749789) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22749796) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (22809800) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (22809807) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23049844) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23049852) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23109856) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23109863) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23169867) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23169874) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23229878) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23229885) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23349900) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23349907) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23409911) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23409918) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23529933) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23529940) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23709966) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23709974) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23829989) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23829996) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23890000) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23890007) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (23950011) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (23950018) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24070033) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24070040) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24130044) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24130051) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24190055) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24190062) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24370088) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24370096) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24430099) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24430107) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24550122) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24550129) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24610133) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24610140) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24670144) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24670151) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m
+[0;32mI (24910188) COMM: JSON recibido (149 bytes): {"header":{"ver":1,"src_id":"SENSOR_01","src_type":"SEC_SENSOR"},"payload":{"type":"HEARTBEAT","action":"STATE_CHANGE","value":"OPEN","battery":100}}[0m
+[0;32mI (24910195) CTRL: Mensaje recibido de: SENSOR_01 (tipo: 4)[0m

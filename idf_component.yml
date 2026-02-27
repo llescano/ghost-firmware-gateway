@@ -9,3 +9,5 @@ dependencies:
   espressif/cjson: "*"
   # Componente de botones para uso futuro, se descargará si se requiere
   espressif/button: ">=4.1.5"
+  # WebSocket client para Supabase Realtime (Phoenix Channels)
+  espressif/esp_websocket_client: "^1.6.0"
