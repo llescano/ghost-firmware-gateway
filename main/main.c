@@ -24,7 +24,7 @@
 #include "wifi_manager.h"
 #include "supabase_client.h"
 #include "sntp_sync.h"
-#include "realtime_commands.h"
+#include "command_processor.h"
 
 // ============================================================================
 // Constantes y configuración
@@ -137,14 +137,14 @@ static void on_wifi_state_change(wifi_state_t state, void *ctx)
             ESP_LOGE(TAG, "Error enviando evento: %s", esp_err_to_name(ret));
         }
 
-        // Inicializar procesador de comandos en tiempo real (Supabase Realtime)
-        ESP_LOGI(TAG, "Inicializando comandos realtime...");
-        ret = realtime_commands_init();
+        // Inicializar procesador de comandos remotos (polling)
+        ESP_LOGI(TAG, "Inicializando procesador de comandos...");
+        ret = command_processor_init();
         if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "Error inicializando realtime commands: %s", esp_err_to_name(ret));
+            ESP_LOGE(TAG, "Error inicializando command processor: %s", esp_err_to_name(ret));
             // No crashear - el sistema puede funcionar sin comandos remotos
         } else {
-            ESP_LOGI(TAG, "✅ Comandos realtime iniciados - escuchando ARM/DISARM");
+            ESP_LOGI(TAG, "✅ Procesador de comandos iniciado - polling cada 5s");
         }
         
     } else if (state == WIFI_STATE_DISCONNECTED) {
