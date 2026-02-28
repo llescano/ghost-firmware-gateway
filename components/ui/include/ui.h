@@ -23,6 +23,9 @@ typedef enum {
     LED_SYS_TAMPER,           /**< Tamper detectado - Amarillo parpadeando */
     LED_SYS_BOOT,             /**< Inicializando - Azul parpadeando */
     LED_SYS_ERROR,            /**< Error - Rojo/Verde alternando */
+    LED_SYS_PROVISIONING,     /**< Modo provisioning - Azul fijo */
+    LED_SYS_OFFLINE,          /**< Offline - Naranja parpadeando lento */
+    LED_SYS_UNCONFIGURED,     /**< Sin configurar - Rojo parpadeando rápido */
 } led_system_state_t;
 
 // ============================================================================
@@ -37,9 +40,15 @@ typedef void (*ui_button_click_cb_t)(void);
 
 /**
  * @brief Tipo de callback para long press del botón
- * @note Se llama cuando se detecta una pulsación larga en el botón BOOT
+ * @note Se llama cuando se detecta una pulsación larga (~5s)
  */
 typedef void (*ui_button_long_press_cb_t)(void);
+
+/**
+ * @brief Tipo de callback para factory reset del botón
+ * @note Se llama cuando se detecta una pulsación muy larga (~10s)
+ */
+typedef void (*ui_button_factory_reset_cb_t)(void);
 
 // ============================================================================
 // Inicialización
@@ -74,10 +83,17 @@ void ui_set_button_click_callback(ui_button_click_cb_t callback);
 
 /**
  * @brief Configura el callback para long press del botón BOOT
- * 
- * @param callback Función a llamar cuando se detecta una pulsación larga
+ *
+ * @param callback Función a llamar cuando se detecta una pulsación larga (~5s)
  */
 void ui_set_button_long_press_callback(ui_button_long_press_cb_t callback);
+
+/**
+ * @brief Configura el callback para factory reset del botón BOOT
+ *
+ * @param callback Función a llamar cuando se detecta una pulsación muy larga (~10s)
+ */
+void ui_set_button_factory_reset_callback(ui_button_factory_reset_cb_t callback);
 
 // ============================================================================
 // Control del LED

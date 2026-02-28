@@ -1,0 +1,261 @@
+Command: C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe I:\esp32\v5.5.1\esp-idf\tools/idf_monitor.py -p COM22 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 I:\esp32\ghost\firmware_gateway\build\firmware_gateway.elf I:\esp32\ghost\firmware_gateway\build\bootloader\bootloader.elf --force-color -m 'C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe' 'I:\esp32\v5.5.1\esp-idf\tools\idf.py'
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x0 (DOWNLOAD(USB/UART0))
+Saved PC:0x40041a79
+waiting for download
+[0;32mI (293) esp_image: segment 4: paddr=001224c4 vaddr=4037bdac sizeI (764) GATEWAY_MAIN: Inicializando WiFi Provisioner...[0m
+[0;32mI (769) wifi_prov: Provisionador inicializado[0m
+[0;32mI (773) wifi_prov:   SSID: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (777) wifi_prov:   IP: 192.168.4.1[0m
+[0;32mI (781) GATEWAY_MAIN: Inicializando cliente Supabase...[0m
+[0;32mI (786) SUPABASE_CLIENT: Cliente Supabase inicializado[0m
+[0;32mI (791) SUPABASE_CLIENT:   Host: ekwdgsgjtmhlvaiwfhuo.supabase.co:443[0m
+[0;32mI (797) SUPABASE_CLIENT:   Path: /functions/v1/ghost-event-public[0m
+[0;32mI (803) SUPABASE_CLIENT:   Device Key: ghost-gateway-001[0m
+[0;32mI (808) SUPABASE_CLIENT:   Mode: Connection close (no keep-alive)[0m
+[0;32mI (813) GATEWAY_MAIN: [0m
+[0;32mI (815) GATEWAY_MAIN: ⚠️  Dispositivo no configurado[0m
+[0;32mI (820) GATEWAY_MAIN: [0m
+[0;32mI (823) GATEWAY_MAIN: Para configurar:[0m
+[0;32mI (826) GATEWAY_MAIN:   - Presiona BOOT (5s) para iniciar modo setup[0m
+[0;32mI (832) GATEWAY_MAIN: [0m
+[0;32mI (834) UI: Estado LED cambiado a: 8[0m
+[0;32mI (838) GATEWAY_MAIN: Inicializando comunicación ESP-Now...[0m
+[0;32mI (843) COMM: Inicializando módulo de comunicación[0m
+[0;32mI (850) ESPNOW: espnow [version: 2.0] init[0m
+[0;32mI (852) COMM: Comm processing task iniciada[0m
+[0;32mI (855) COMM: Módulo de comunicación inicializado correctamente[0m
+[0;32mI (861) COMM: Gateway MAC: B8:F8:62:D7:5A:40[0m
+[0;32mI (865) GATEWAY_MAIN: Estado inicial: 1[0m
+[0;32mI (869) UI: Estado LED cambiado a: 1[0m
+[0;32mI (872) GATEWAY_MAIN: Sistema iniciado correctamente[0m
+[0;32mI (877) GATEWAY_MAIN: Botón BOOT: click=toggle arm/desarm, long press=desarmar[0m
+[0;32mI (884) main_task: Returned from app_main()[0m
+[0;32mI (10636) UI: Botón BOOT: long press detectado (5s) - Modo provisioning[0m
+[0;32mI (10637) GATEWAY_MAIN: Botón: Long press (5s) - Iniciando modo provisionamiento[0m
+[0;33mW (10639) wifi_prov: Provisionador ya inicializado[0m
+[0;32mI (10644) GATEWAY_MAIN: Provisioner state: 1[0m
+[0;32mI (10648) wifi_prov: Configurando WiFi en modo AP+STA...[0m
+[0;32mI (10653) wifi:mode : sta (b8:f8:62:d7:5a:40) + softAP (b8:f8:62:d7:5a:41)[0m
+[0;32mI (10660) wifi:Total power save buffer number: 16[0m
+[0;32mI (10664) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (10669) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (10681) wifi:Total power save buffer number: 16[0m
+[0;32mI (10684) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (10687) http_server: ✅ HTTP server iniciado (puerto 80)[0m
+[0;32mI (10691) GATEWAY_MAIN: Provisioner state: 2[0m
+[0;32mI (10694) wifi_prov: ✅ Provisionador iniciado[0m
+[0;32mI (10699) wifi_prov:    SoftAP: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (10704) wifi_prov:    IP: 192.168.4.1[0m
+[0;32mI (10707) UI: Estado LED cambiado a: 6[0m
+[0;32mI (10711) GATEWAY_MAIN: ========================================[0m
+[0;32mI (10717) GATEWAY_MAIN:   MODO PROVISIONAMIENTO ACTIVO[0m
+[0;32mI (10721) GATEWAY_MAIN: ========================================[0m
+[0;32mI (10727) GATEWAY_MAIN:   SSID: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (10732) GATEWAY_MAIN:   IP: 192.168.4.1[0m
+[0;32mI (10736) GATEWAY_MAIN: ========================================[0m
+[0;32mI (18982) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<0,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (18983) wifi:station: 50:3e:aa:76:f8:0f join, AID=1, bgn, 40U[0m
+[0;32mI (18985) wifi_prov: Station conectada al SoftAP: 50:3e:aa:76:f8:0f[0m
+[0;32mI (18997) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2[0m
+[0;32mI (22687) wifi:<ba-add>idx:2 (ifx:1, 50:3e:aa:76:f8:0f), tid:0, ssn:114, winSize:64[0m
+[0;32mI (22780) http_server: API scan handler llamado[0m
+[0;32mI (22780) wifi_prov: Escaneando redes WiFi...[0m
+[0;32mI (25620) wifi_prov: ✅ Scan completo: 9 redes encontradas[0m
+[0;32mI (36529) http_server: API connect handler iniciado[0m
+[0;32mI (36530) http_server: Conectando a WiFi: Lescano-WiFi_EXT[0m
+[0;32mI (36530) GATEWAY_MAIN: Provisioner state: 3[0m
+[0;32mI (36532) wifi_prov: Conectando a: Lescano-WiFi_EXT[0m
+[0;32mI (36570) wifi_manager: Credenciales guardadas correctamente[0m
+[0;32mI (36571) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (36676) wifi:primary chan differ, old=1, new=7, start CSA timer[0m
+[0;32mI (37076) wifi:switch to channel 7[0m
+[0;32mI (37077) wifi:ap channel adjust o:1,1 n:7,2[0m
+[0;32mI (37077) wifi:new:<7,2>, old:<1,1>, ap:<7,2>, sta:<0,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (37081) wifi:new:<7,2>, old:<7,2>, ap:<7,2>, sta:<7,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (37088) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (37095) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (37101) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (37135) wifi:connected with Lescano-WiFi_EXT, aid = 3, channel 7, BW20, bssid = 28:87:ba:90:08:9a[0m
+[0;32mI (37136) wifi:security: WPA2-PSK, phy: bgn, rssi: -73[0m
+[0;32mI (37150) wifi:pm start, type: 1[0m
+
+[0;32mI (37151) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (37151) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (37160) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (37167) wifi_manager: Conectado al AP, esperando IP...[0m
+[0;32mI (37170) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (37174) wifi_prov: ✅ Conectado al AP, esperando IP...[0m
+[0;32mI (38553) esp_netif_handlers: sta ip: 192.168.1.124, mask: 255.255.255.0, gw: 192.168.1.1[0m
+[0;32mI (38554) wifi_manager: IP obtenida: 192.168.1.124[0m
+[0;32mI (38555) GATEWAY_MAIN: WiFi state changed: 2[0m
+[0;32mI (38555) wifi_manager: Conectado a SSID: Lescano-WiFi_EXT[0m
+[0;32mI (38559) GATEWAY_MAIN: WiFi conectado! IP: 192.168.1.124[0m
+[0;32mI (38564) http_server: STA IP obtenida: 192.168.1.124[0m
+[0;32mI (38569) GATEWAY_MAIN: Deteniendo modo provisionamiento...[0m
+[0;32mI (38574) http_server: WiFi conectado, IP: 192.168.1.124[0m
+[0;32mI (38579) GATEWAY_MAIN: Provisioner state: 6[0m
+[0;32mI (38584) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (38619) wifi:<ba-add>idx:0 (ifx:0, 28:87:ba:90:08:9a), tid:0, ssn:5, winSize:64[0m
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x420b62f8  PS      : 0x00060730  A0      : 0x82009114  A1      : 0x3fcbc980  
+A2      : 0xe6002108  A3      : 0x00000002  A4      : 0x3fcc3410  A5      : 0x00000118  
+A6      : 0x00000000  A7      : 0x3fcc352d  A8      : 0x80381653  A9      : 0x3fcbc960  
+A10     : 0x3fcbc4bc  A11     : 0x00000000  A12     : 0x00000000  A13     : 0x00000000  
+A14     : 0x00000000  A15     : 0x3fced09c  SAR     : 0x00000008  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0xe6002108  LBEG    : 0x40056f5c  LEND    : 0x40056f72  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x420b62f5:0x3fcbc980 0x42009111:0x3fcbc9a0 0x420327e9:0x3fcbc9c0 0x42035983:0x3fcbc9e0 0x42035ceb:0x3fcbca00 0x42035d51:0x3fcbca50 0x42034ed8:0x3fcbca80 0x42034fee:0x3fcbcab0 0x4200befa:0x3fcbcad0 0x420a50c6:0x3fcbcaf0 0x4204dca6:0x3fcbcb10 0x42048b2a:0x3fcbcb30 0x420498a1:0x3fcbcb50 0x4204a129:0x3fcbcb70 0x4204a1c9:0x3fcbcb90 0x42042d62:0x3fcbcbb0 0x42041339:0x3fcbcbd0 0x420415eb:0x3fcbcbf0 0x42042685:0x3fcbcc30 0x4201552d:0x3fcbcc60 0x42016038:0x3fcbcce0 0x42015145:0x3fcbd120 0x420472bd:0x3fcbd2e0 0x42047e2f:0x3fcbd320 0x42047eda:0x3fcbd3b0 0x42046692:0x3fcbd3d0 0x420455b0:0x3fcbd3f0 0x420b7a03:0x3fcbd420 0x42045e5f:0x3fcbd440 0x42045f06:0x3fcbd490 0x4037eeb9:0x3fcbd4b0
+
+
+
+
+ELF file SHA256: 84d2d9257
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037b976
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+[0;32mI (24) boot: ESP-IDF v5.5.1-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Feb 28 2026 10:20:04[0m
+[0;32mI (24) boot: Multicore bootloader[0m
+[0;32mI (25) boot: chip revision: v0.2[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (31) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (35) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (39) boot.esp32s3: SPI Flash Size : 4MB[0m
+[0;32mI (42) boot: Enabling RNG early entropy source...[0m
+[0;32mI (47) boot: Partition Table:[0m
+[0;32mI (50) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (69) boot:  2 factory          factory app      00 00 00010000 00200000[0m
+[0;32mI (75) boot: End of partition table[0m
+[0;32mI (79) esp_image: segment 0: paddr=00010020 vaddr=3c0d0020 size=431a4h (274852) map[0m
+[0;32mI (135) esp_image: segment 1: paddr=000531cc vaddr=3fc9df00 size=05098h ( 20632) load[0m
+[0;32mI (139) esp_image: segment 2: paddr=0005826c vaddr=40374000 size=07dach ( 32172) load[0m
+[0;32mI (147) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=c249ch (795804) map[0m
+[0;32mI (288) esp_image: segment 4: paddr=001224c4 vaddr=4037bdac size=12084h ( 73860) load[0m
+[0;32mI (305) esp_image: segment 5: paddr=00134550 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (315) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (315) boot: Disabling RNG early entropy source...[0m
+[0;32mI (326) cpu_start: Multicore app[0m
+[0;32mI (335) cpu_start: Pro cpu start user code[0m
+[0;32mI (335) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (335) app_init: Application information:[0m
+[0;32mI (335) app_init: Project name:     firmware_gateway[0m
+[0;32mI (339) app_init: App version:      d3dcbf9-dirty[0m
+[0;32mI (344) app_init: Compile time:     Feb 28 2026 10:19:45[0m
+[0;32mI (349) app_init: ELF file SHA256:  84d2d9257...[0m
+[0;32mI (353) app_init: ESP-IDF:          v5.5.1-dirty[0m
+[0;32mI (358) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (361) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (365) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (369) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (376) heap_init: At 3FCA7878 len 00041E98 (263 KiB): RAM[0m
+[0;32mI (381) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (386) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (391) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (397) spi_flash: detected chip: generic[0m
+[0;32mI (400) spi_flash: flash io: dio[0m
+[0;32mI (403) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (409) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (416) main_task: Started on CPU0[0m
+[0;32mI (419) main_task: Calling app_main()[0m
+[0;32mI (422) GATEWAY_MAIN: ========================================[0m
+[0;32mI (428) GATEWAY_MAIN:   GHOST - Gateway de Seguridad[0m
+[0;32mI (432) GATEWAY_MAIN:   Target: ESP32-S3-Zero[0m
+[0;32mI (436) GATEWAY_MAIN: ========================================[0m
+[0;32mI (472) GATEWAY_MAIN: NVS inicializado correctamente[0m
+[0;32mI (472) GATEWAY_MAIN: Inicializando identidad del dispositivo...[0m
+[0;32mI (474) device_identity: Identidad cargada: GHOST-D75A40 (provisioned=0, linked=0)[0m
+[0;32mI (479) device_identity: Pairing token generado: QMuXcVbHzTP920ccmNGeYUw86aUcq0[0m
+[0;32mI (488) GATEWAY_MAIN: Device ID: GHOST-D75A40[0m
+[0;32mI (490) GATEWAY_MAIN: Inicializando UI...[0m
+[0;32mI (493) UI: Inicializando módulo de UI[0m
+[0;32mI (497) led_strips: LED Indicator Version: 2.1.1[0m
+[0;32mI (503) led_strips: Indicator create successfully. type:LED Strips mode, hardware_data:0x3fce9c24, blink_lists:custom[0m
+[0;32mI (512) UI: Indicador LED WS2812 creado en GPIO 21[0m
+[0;32mI (516) button: IoT Button Version: 4.1.5[0m
+[0;32mI (520) UI: Botón BOOT configurado en GPIO 0[0m
+[0;32mI (524) UI: Módulo de UI inicializado[0m
+[0;32mI (527) GATEWAY_MAIN: Inicializando controlador...[0m
+[0;32mI (532) CTRL: Inicializando controlador[0m
+[0;32mI (536) CTRL: Boot mode: LAST_STATE (restaurando 1)[0m
+[0;32mI (540) CTRL: Tarea del controlador iniciada[0m
+[0;32mI (544) CTRL: Controlador inicializado - Estado: 1[0m
+[0;32mI (549) UI: Callback de click configurado[0m
+[0;32mI (552) UI: Callback de long press configurado[0m
+[0;32mI (557) UI: Callback de factory reset configurado[0m
+[0;32mI (561) GATEWAY_MAIN: Inicializando WiFi Manager...[0m
+[0;32mI (567) wifi_manager: Creando netif STA...[0m
+[0;32mI (570) pp: pp rom version: e7ae62f[0m
+[0;32mI (573) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (578) wifi:wifi driver task: 3fceec6c, prio:23, stack:6656, core=0[0m
+[0;32mI (599) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (600) wifi:wifi certification version: v7.0[0m
+[0;32mI (600) wifi:config NVS flash: enabled[0m
+[0;32mI (600) wifi:config nano formatting: disabled[0m
+[0;32mI (604) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (609) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (613) wifi:Init management short buffer num: 32[0m
+[0;32mI (617) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (621) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (625) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (630) wifi:Init static rx buffer num: 10[0m
+[0;32mI (633) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (638) wifi_init: rx ba win: 6[0m
+[0;32mI (640) wifi_init: accept mbox: 6[0m
+[0;32mI (643) wifi_init: tcpip mbox: 32[0m
+[0;32mI (646) wifi_init: udp mbox: 6[0m
+[0;32mI (649) wifi_init: tcp mbox: 6[0m
+[0;32mI (652) wifi_init: tcp tx win: 5744[0m
+[0;32mI (655) wifi_init: tcp rx win: 5744[0m
+[0;32mI (658) wifi_init: tcp mss: 1436[0m
+[0;32mI (661) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (665) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (671) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10[0m
+[0;32mI (711) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (730) wifi:mode : sta (b8:f8:62:d7:5a:40)[0m
+[0;32mI (731) wifi:enable tsf[0m
+[0;32mI (733) wifi_manager: WiFi manager inicializado correctamente[0m
+[0;32mI (733) wifi_manager: WiFi STA iniciado[0m
+[0;32mI (735) GATEWAY_MAIN: Inicializando WiFi Provisioner...[0m
+[0;32mI (740) wifi_prov: Provisionador inicializado[0m
+[0;32mI (744) wifi_prov:   SSID: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (748) wifi_prov:   IP: 192.168.4.1[0m
+[0;32mI (752) GATEWAY_MAIN: Inicializando cliente Supabase...[0m
+[0;32mI (757) SUPABASE_CLIENT: Cliente Supabase inicializado[0m
+[0;32mI (762) SUPABASE_CLIENT:   Host: ekwdgsgjtmhlvaiwfhuo.supabase.co:443[0m
+[0;32mI (768) SUPABASE_CLIENT:   Path: /functions/v1/ghost-event-public[0m
+[0;32mI (774) SUPABASE_CLIENT:   Device Key: ghost-gateway-001[0m
+[0;32mI (779) SUPABASE_CLIENT:   Mode: Connection close (no keep-alive)[0m
+[0;32mI (784) GATEWAY_MAIN: [0m
+[0;32mI (786) GATEWAY_MAIN: ⚠️  Dispositivo no configurado[0m
+[0;32mI (791) GATEWAY_MAIN: [0m
+[0;32mI (794) GATEWAY_MAIN: Para configurar:[0m
+[0;32mI (797) GATEWAY_MAIN:   - Presiona BOOT (5s) para iniciar modo setup[0m
+[0;32mI (803) GATEWAY_MAIN: [0m
+[0;32mI (805) UI: Estado LED cambiado a: 8[0m
+[0;32mI (808) GATEWAY_MAIN: Inicializando comunicación ESP-Now...[0m
+[0;32mI (814) COMM: Inicializando módulo de comunicación[0m
+[0;32mI (821) ESPNOW: espnow [version: 2.0] init[0m
+[0;32mI (823) COMM: Comm processing task iniciada[0m
+[0;32mI (826) COMM: Módulo de comunicación inicializado correctamente[0m
+[0;32mI (832) COMM: Gateway MAC: B8:F8:62:D7:5A:40[0m
+[0;32mI (836) GATEWAY_MAIN: Estado inicial: 1[0m
+[0;32mI (840) UI: Estado LED cambiado a: 1[0m
+[0;32mI (843) GATEWAY_MAIN: Sistema iniciado correctamente[0m
+[0;32mI (848) GATEWAY_MAIN: Botón BOOT: click=toggle arm/desarm, long press=desarmar[0m
+[0;32mI (855) main_task: Returned from app_main()[0m

@@ -67,6 +67,17 @@ esp_err_t supabase_send_event(const device_event_t *event);
  */
 bool supabase_is_initialized(void);
 
+/**
+ * @brief Obtiene un link_code de 6 dígitos desde Supabase
+ *
+ * Llama a la edge function ghost-token-create para generar un código
+ * de vinculación temporal (24h).
+ *
+ * @param[out] link_code Buffer donde se escribirá el código (mínimo 8 bytes)
+ * @return ESP_OK si éxito, error code si falla
+ */
+esp_err_t supabase_get_link_code(char *link_code);
+
 #ifdef __cplusplus
 }
 #endif

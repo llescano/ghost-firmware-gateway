@@ -5,5 +5,5 @@
 idf_component_register(
     SRCS "src/supabase_client.c"
     INCLUDE_DIRS "include"
-    REQUIRES esp-tls nvs_flash json lwip esp_netif sntp_sync
+    REQUIRES esp-tls nvs_flash json lwip esp_netif sntp_sync device_identity
 )

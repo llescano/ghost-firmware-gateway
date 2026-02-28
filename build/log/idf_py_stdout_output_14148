@@ -1,0 +1,323 @@
+Command: C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe I:\esp32\v5.5.1\esp-idf\tools/idf_monitor.py -p COM22 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 I:\esp32\ghost\firmware_gateway\build\firmware_gateway.elf I:\esp32\ghost\firmware_gateway\build\bootloader\bootloader.elf --force-color -m 'C:\Users\Luis\.espressif\python_env\idf5.5_py3.13_env\Scripts\python.exe' 'I:\esp32\v5.5.1\esp-idf\tools\idf.py'
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x23 (DOWNLOAD(USB/UART0))
+Saved PC:0x40041a7c
+waiting for download
+[0;32mI (293) esp_image: segment 4: paddr=001223a4 vaddr=4037bd8c size=120a4h ( 73892) load[0m
+[0;32mI (309) esp_image: segment 5: paddr=00134450 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (320) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (320) boot: Disabling RNG early entropy source...[0m
+[0;32mI (330) cpu_start: Multicore app[0m
+[0;32mI (339) cpu_start: Pro cpu start user code[0m
+[0;32mI (339) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (339) app_init: Application information:[0m
+[0;32mI (339) app_init: Project name:     firmware_gateway[0m
+[0;32mI (344) app_init: App version:      d3dcbf9-dirty[0m
+[0;32mI (348) app_init: Compile time:     Feb 28 2026 10:19:45[0m
+[0;32mI (353) app_init: ELF file SHA256:  3177a64ee...[0m
+[0;32mI (358) app_init: ESP-IDF:          v5.5.1-dirty[0m
+[0;32mI (362) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (366) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (370) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (374) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (380) heap_init: At 3FCA7888 len 00041E88 (263 KiB): RAM[0m
+[0;32mI (385) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (390) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (395) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (402) spi_flash: detected chip: generic[0m
+[0;32mI (404) spi_flash: flash io: dio[0m
+[0;32mI (408) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (414) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (421) main_task: Started on CPU0[0m
+[0;32mI (424) main_task: Calling app_main()[0m
+[0;32mI (427) GATEWAY_MAIN: ========================================[0m
+[0;32mI (433) GATEWAY_MAIN:   GHOST - Gateway de Seguridad[0m
+[0;32mI (437) GATEWAY_MAIN:   Target: ESP32-S3-Zero[0m
+[0;32mI (441) GATEWAY_MAIN: ========================================[0m
+[0;32mI (476) GATEWAY_MAIN: NVS inicializado correctamente[0m
+[0;32mI (476) GATEWAY_MAIN: Inicializando identidad del dispositivo...[0m
+[0;32mI (478) device_identity: Identidad cargada: GHOST-D75A40 (provisioned=0, linked=0)[0m
+[0;32mI (483) device_identity: Pairing token generado: f21zvrZIJMoNYmvDr5[0m
+[0;32mI (492) GATEWAY_MAIN: Device ID: GHOST-D75A40[0m
+[0;32mI (493) GATEWAY_MAIN: Inicializando UI...[0m
+[0;32mI (497) UI: Inicializando módulo de UI[0m
+[0;32mI (500) led_strips: LED Indicator Version: 2.1.1[0m
+[0;32mI (506) led_strips: Indicator create successfully. type:LED Strips mode, hardware_data:0x3fce9c24, blink_lists:custom[0m
+[0;32mI (515) UI: Indicador LED WS2812 creado en GPIO 21[0m
+[0;32mI (520) button: IoT Button Version: 4.1.5[0m
+[0;32mI (523) UI: Botón BOOT configurado en GPIO 0[0m
+[0;32mI (527) UI: Módulo de UI inicializado[0m
+[0;32mI (531) GATEWAY_MAIN: Inicializando controlador...[0m
+[0;32mI (535) CTRL: Inicializando controlador[0m
+[0;32mI (539) CTRL: Boot mode: LAST_STATE (restaurando 1)[0m
+[0;32mI (543) CTRL: Tarea del controlador iniciada[0m
+[0;32mI (547) CTRL: Controlador inicializado - Estado: 1[0m
+[0;32mI (552) UI: Callback de click configurado[0m
+[0;32mI (556) UI: Callback de long press configurado[0m
+[0;32mI (560) UI: Callback de factory reset configurado[0m
+[0;32mI (564) GATEWAY_MAIN: Inicializando WiFi Manager...[0m
+[0;32mI (570) wifi_manager: Creando netif STA...[0m
+[0;32mI (574) pp: pp rom version: e7ae62f[0m
+[0;32mI (576) net80211: net80211 rom version: e7ae62f[0m
+[0;32mI (582) wifi:wifi driver task: 3fcb2c84, prio:23, stack:6656, core=0[0m
+[0;32mI (603) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (603) wifi:wifi certification version: v7.0[0m
+[0;32mI (603) wifi:config NVS flash: enabled[0m
+[0;32mI (603) wifi:config nano formatting: disabled[0m
+[0;32mI (608) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (612) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (616) wifi:Init management short buffer num: 32[0m
+[0;32mI (621) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (625) wifi:Init static tx FG buffer num: 2[0m
+[0;32mI (629) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (633) wifi:Init static rx buffer num: 10[0m
+[0;32mI (637) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (642) wifi_init: rx ba win: 6[0m
+[0;32mI (643) wifi_init: accept mbox: 6[0m
+[0;32mI (646) wifi_init: tcpip mbox: 32[0m
+[0;32mI (649) wifi_init: udp mbox: 6[0m
+[0;32mI (652) wifi_init: tcp mbox: 6[0m
+[0;32mI (655) wifi_init: tcp tx win: 5744[0m
+[0;32mI (658) wifi_init: tcp rx win: 5744[0m
+[0;32mI (661) wifi_init: tcp mss: 1436[0m
+[0;32mI (664) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (668) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (675) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10[0m
+[0;32mI (714) wifi:mode : sta (b8:f8:62:d7:5a:40)[0m
+[0;32mI (715) wifi:enable tsf[0m
+[0;32mI (717) wifi_manager: WiFi manager inicializado correctamente[0m
+[0;32mI (717) wifi_manager: WiFi STA iniciado[0m
+[0;32mI (719) GATEWAY_MAIN: Inicializando WiFi Provisioner...[0m
+[0;32mI (724) wifi_prov: Provisionador inicializado[0m
+[0;32mI (728) wifi_prov:   SSID: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (732) wifi_prov:   IP: 192.168.4.1[0m
+[0;32mI (736) GATEWAY_MAIN: Inicializando cliente Supabase...[0m
+[0;32mI (741) SUPABASE_CLIENT: Cliente Supabase inicializado[0m
+[0;32mI (745) SUPABASE_CLIENT:   Host: ekwdgsgjtmhlvaiwfhuo.supabase.co:443[0m
+[0;32mI (752) SUPABASE_CLIENT:   Path: /functions/v1/ghost-event-public[0m
+[0;32mI (757) SUPABASE_CLIENT:   Device Key: ghost-gateway-001[0m
+[0;32mI (762) SUPABASE_CLIENT:   Mode: Connection close (no keep-alive)[0m
+[0;32mI (768) GATEWAY_MAIN: [0m
+[0;32mI (770) GATEWAY_MAIN: ⚠️  Dispositivo no configurado[0m
+[0;32mI (775) GATEWAY_MAIN: [0m
+[0;32mI (777) GATEWAY_MAIN: Para configurar:[0m
+[0;32mI (781) GATEWAY_MAIN:   - Presiona BOOT (5s) para iniciar modo setup[0m
+[0;32mI (787) GATEWAY_MAIN: [0m
+[0;32mI (789) UI: Estado LED cambiado a: 8[0m
+[0;32mI (792) GATEWAY_MAIN: Inicializando comunicación ESP-Now...[0m
+[0;32mI (798) COMM: Inicializando módulo de comunicación[0m
+[0;32mI (804) ESPNOW: espnow [version: 2.0] init[0m
+[0;32mI (806) COMM: Comm processing task iniciada[0m
+[0;32mI (810) COMM: Módulo de comunicación inicializado correctamente[0m
+[0;32mI (816) COMM: Gateway MAC: B8:F8:62:D7:5A:40[0m
+[0;32mI (820) GATEWAY_MAIN: Estado inicial: 1[0m
+[0;32mI (824) UI: Estado LED cambiado a: 1[0m
+[0;32mI (827) GATEWAY_MAIN: Sistema iniciado correctamente[0m
+[0;32mI (831) GATEWAY_MAIN: Botón BOOT: click=toggle arm/desarm, long press=desarmar[0m
+[0;32mI (839) main_task: Returned from app_main()[0m
+[0;32mI (7753) UI: Botón BOOT: long press detectado (5s) - Modo provisioning[0m
+[0;32mI (7754) GATEWAY_MAIN: Botón: Long press (5s) - Iniciando modo provisionamiento[0m
+[0;33mW (7756) wifi_prov: Provisionador ya inicializado[0m
+[0;32mI (7760) GATEWAY_MAIN: Provisioner state: 1[0m
+[0;32mI (7764) wifi_prov: Configurando WiFi en modo AP+STA...[0m
+[0;32mI (7770) wifi:mode : sta (b8:f8:62:d7:5a:40) + softAP (b8:f8:62:d7:5a:41)[0m
+[0;32mI (7777) wifi:Total power save buffer number: 16[0m
+[0;32mI (7780) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (7785) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (7797) wifi:Total power save buffer number: 16[0m
+[0;32mI (7799) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (7804) http_server: ✅ HTTP server iniciado (puerto 80)[0m
+[0;32mI (7806) GATEWAY_MAIN: Provisioner state: 2[0m
+[0;32mI (7810) wifi_prov: ✅ Provisionador iniciado[0m
+[0;32mI (7814) wifi_prov:    SoftAP: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (7819) wifi_prov:    IP: 192.168.4.1[0m
+[0;32mI (7823) UI: Estado LED cambiado a: 6[0m
+[0;32mI (7826) GATEWAY_MAIN: ========================================[0m
+[0;32mI (7832) GATEWAY_MAIN:   MODO PROVISIONAMIENTO ACTIVO[0m
+[0;32mI (7836) GATEWAY_MAIN: ========================================[0m
+[0;32mI (7842) GATEWAY_MAIN:   SSID: Ghost-Setup-GHOST-D75A40[0m
+[0;32mI (7847) GATEWAY_MAIN:   IP: 192.168.4.1[0m
+[0;32mI (7851) GATEWAY_MAIN: ========================================[0m
+[0;32mI (13335) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<0,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (13336) wifi:station: 50:3e:aa:76:f8:0f join, AID=1, bgn, 40U[0m
+[0;32mI (13338) wifi_prov: Station conectada al SoftAP: 50:3e:aa:76:f8:0f[0m
+[0;32mI (13356) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2[0m
+[0;32mI (16173) http_server: API scan handler llamado[0m
+[0;32mI (16173) wifi_prov: Escaneando redes WiFi...[0m
+[0;32mI (17060) wifi:<ba-add>idx:2 (ifx:1, 50:3e:aa:76:f8:0f), tid:0, ssn:113, winSize:64[0m
+[0;32mI (19014) wifi_prov: ✅ Scan completo: 9 redes encontradas[0m
+[0;32mI (24775) http_server: API connect handler iniciado[0m
+[0;32mI (24776) http_server: Conectando a WiFi: Lescano-WiFi_EXT[0m
+[0;32mI (24776) GATEWAY_MAIN: Provisioner state: 3[0m
+[0;32mI (24778) wifi_prov: Conectando a: Lescano-WiFi_EXT[0m
+[0;32mI (24784) wifi_manager: Credenciales guardadas correctamente[0m
+[0;32mI (24788) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (24800) wifi:primary chan differ, old=1, new=7, start CSA timer[0m
+[0;32mI (25201) wifi:switch to channel 7[0m
+[0;32mI (25202) wifi:ap channel adjust o:1,1 n:7,2[0m
+[0;32mI (25202) wifi:new:<7,2>, old:<1,1>, ap:<7,2>, sta:<0,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (25206) wifi:new:<7,2>, old:<7,2>, ap:<7,2>, sta:<7,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (25212) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (25221) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (25227) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (25267) wifi:connected with Lescano-WiFi_EXT, aid = 3, channel 7, BW20, bssid = 28:87:ba:90:08:9a[0m
+[0;32mI (25268) wifi:security: WPA2-PSK, phy: bgn, rssi: -67[0m
+[0;32mI (25273) wifi:pm start, type: 1[0m
+
+[0;32mI (25273) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (25282) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000[0m
+[0;32mI (25292) wifi_manager: Conectado al AP, esperando IP...[0m
+[0;32mI (25295) GATEWAY_MAIN: WiFi state changed: 1[0m
+[0;32mI (25299) wifi_prov: ✅ Conectado al AP, esperando IP...[0m
+[0;32mI (25337) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (26654) esp_netif_handlers: sta ip: 192.168.1.124, mask: 255.255.255.0, gw: 192.168.1.1[0m
+[0;32mI (26655) wifi_manager: IP obtenida: 192.168.1.124[0m
+[0;32mI (26656) GATEWAY_MAIN: WiFi state changed: 2[0m
+[0;32mI (26656) wifi_manager: Conectado a SSID: Lescano-WiFi_EXT[0m
+[0;32mI (26660) GATEWAY_MAIN: WiFi conectado! IP: 192.168.1.124[0m
+[0;32mI (26666) http_server: STA IP obtenida: 192.168.1.124[0m
+[0;32mI (26670) GATEWAY_MAIN: WiFi conectado en modo provisionamiento - manteniendo SoftAP activo[0m
+[0;32mI (26675) http_server: WiFi conectado, IP: 192.168.1.124[0m
+[0;32mI (26683) GATEWAY_MAIN: Inicializando SNTP...[0m
+[0;32mI (26690) http_server: Conexión WiFi exitosa, obteniendo link_code en segundo plano...[0m
+[0;32mI (26692) SNTP_SYNC: Inicializando SNTP...[0m
+[0;32mI (26704) SNTP_SYNC: Zona horaria: UTC-3[0m
+[0;32mI (26708) SNTP_SYNC: Servidores NTP: south-america.pool.ntp.org, pool.ntp.org[0m
+[0;32mI (26714) SNTP_SYNC: ✅ SNTP inicializado correctamente[0m
+[0;32mI (26714) SNTP_SYNC: Tarea de sincronización iniciada[0m
+[0;32mI (26719) GATEWAY_MAIN: Cliente Supabase ya inicializado, reanudando...[0m
+[0;32mI (26731) GATEWAY_MAIN: Enviando evento de conexión a Supabase...[0m
+[0;32mI (26737) SUPABASE_CLIENT: Enviando evento: DEVICE_ONLINE[0m
+[0;32mI (26742) SUPABASE_CLIENT: Estado de red:[0m
+[0;32mI (26745) SUPABASE_CLIENT:   IP: 192.168.1.124[0m
+[0;32mI (26749) SUPABASE_CLIENT:   Netmask: 255.255.255.0[0m
+[0;32mI (26754) SUPABASE_CLIENT:   Gateway: 192.168.1.1[0m
+[0;33mW (26759) SUPABASE_CLIENT: SNTP no sincronizado, usando tiempo del sistema[0m
+[0;32mI (26766) SUPABASE_CLIENT: JSON body: {[0m
+	"event_type":	"DEVICE_ONLINE",
+	"payload":	{
+		"event_timestamp":	"1970-01-01T00:00:26Z",
+		"device_id":	"GHOST-D75A40",
+		"device_type":	"GATEWAY"
+	}
+}
+[0;32mI (26990) wifi:<ba-add>idx:0 (ifx:0, 28:87:ba:90:08:9a), tid:0, ssn:4, winSize:64[0m
+[0;32mI (27803) http_server: Intentando obtener link_code...[0m
+[0;32mI (27803) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (28582) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (29248) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (29249) SUPABASE_CLIENT: Enviando petición HTTP (350 bytes)[0m
+[0;32mI (30937) SNTP_SYNC: ✅ Hora sincronizada: 2026-02-28 19:17:12 UTC (sync #1)[0m
+[0;32mI (31164) SUPABASE_CLIENT: Respuesta recibida (960 bytes)[0m
+[0;32mI (31167) SUPABASE_CLIENT: HTTP Status: 201[0m
+[0;32mI (31167) SUPABASE_CLIENT: Respuesta: 42[0m
+{"success":true,"event_id":"15c11591-c060-4bb6-a38c-166f49195342"}
+
+[0;32mI (31172) SUPABASE_CLIENT: ✅ Evento enviado correctamente[0m
+[0;32mI (31178) GATEWAY_MAIN: Evento de conexión enviado[0m
+[0;32mI (31182) GATEWAY_MAIN: Inicializando comandos realtime (WebSocket)...[0m
+[0;32mI (31188) RT_CMD: Inicializando comandos realtime...[0m
+[0;32mI (31193) PHOENIX: Cliente Phoenix inicializado para ekwdgsgjtmhlvaiwfhuo.supabase.co[0m
+[0;32mI (31201) PHOENIX: Conectando a: wss://ekwdgsgjtmhlvaiwfhuo.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVrd2Rnc2dqdG1obHZhaXdmaHVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMjk3OTQsImV4cCI6MjA4NjkwNTc5NH0.JF11ajRjbmVUcapOb08WTGo6rx5lGai0Dx5UVwN074E&vsn=1.0.0[0m
+[0;32mI (31230) websocket_client: Started[0m
+[0;32mI (31230) PHOENIX: WebSocket iniciando...[0m
+[0;32mI (31232) PHOENIX: WebSocket iniciado, esperando conexión...[0m
+[0;32mI (31241) PHOENIX: Suscripción postgres agregada a realtime:public:system_commands (event=INSERT)[0m
+[0;32mI (31250) PHOENIX: Suscripción postgres agregada a realtime:public:system_events (event=INSERT)[0m
+[0;32mI (31258) RT_CMD: ✅ Comandos realtime iniciados[0m
+[0;32mI (31262) RT_CMD: Escuchando comandos ARM/DISARM en tiempo real...[0m
+[0;32mI (31269) RT_CMD: Escuchando cambios de estado desde otros dispositivos...[0m
+[0;32mI (31275) GATEWAY_MAIN: ✅ Comandos realtime iniciados - WebSocket activo[0m
+[0;32mI (32449) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (32487) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (33251) wifi_prov: Station desconectada del SoftAP: 50:3e:aa:76:f8:0f[0m
+[0;32mI (33255) wifi:<ba-del>idx:2, tid:0[0m
+[0;32mI (33256) wifi:new:<7,2>, old:<7,2>, ap:<7,2>, sta:<7,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (33257) wifi:station: 50:3e:aa:76:f8:0f join, AID=1, bgn, 40D[0m
+[0;32mI (33264) wifi_prov: Station conectada al SoftAP: 50:3e:aa:76:f8:0f[0m
+[0;32mI (33276) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2[0m
+[0;32mI (33343) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (33344) SUPABASE_CLIENT: Enviando petición HTTP (226 bytes)[0m
+[0;32mI (33541) SUPABASE_CLIENT: Respuesta recibida (966 bytes)[0m
+[0;32mI (33544) SUPABASE_CLIENT: HTTP Status: 200[0m
+[0;32mI (33545) SUPABASE_CLIENT: Respuesta recibida: 83 bytes - 4d[0m
+{"success":true,"link_code":"279373","expires_at":"2026-03-01T16:17:14.650Z"}
+
+[0;32mI (33553) SUPABASE_CLIENT: JSON parseado: 4[0m
+[1;31mE (33556) SUPABASE_CLIENT: No se encontró link_code en respuesta[0m
+[0;33mW (33562) http_server: Error obteniendo link_code, reintentando en 2s...[0m
+[0;32mI (33572) http_server: Intentando obtener link_code...[0m
+[0;32mI (33573) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (33857) PHOENIX: ✅ WebSocket conectado[0m
+[0;32mI (33858) PHOENIX: Enviando JOIN: {"topic":"realtime:public:system_events","event":"phx_join","ref":"1","payload":{"postgres_changes":[{"event":"INSERT","schema":"public","table":"system_events"}]}}[0m
+[0;32mI (33875) PHOENIX: Enviando JOIN: {"topic":"realtime:public:system_commands","event":"phx_join","ref":"2","payload":{"postgres_changes":[{"event":"INSERT","schema":"public","table":"system_commands"}]}}[0m
+[0;32mI (34154) PHOENIX: ✅ Suscrito a realtime:public:system_events[0m
+[0;32mI (34164) PHOENIX: ✅ Suscrito a realtime:public:system_commands[0m
+[0;32mI (34506) RT_CMD: 📥 Estado sinc recibido (system_events): system[0m
+[0;32mI (34507) RT_CMD: 📋 Payload: {[0m
+	"message":	"Subscribed to PostgreSQL",
+	"status":	"ok",
+	"extension":	"postgres_changes",
+	"channel":	"public:system_events"
+}
+[0;32mI (34518) RT_CMD: 📥 Estado sinc recibido (system_events): presence_state[0m
+[0;32mI (34522) RT_CMD: 📋 Payload: {[0m
+}
+[0;32mI (34531) RT_CMD: 📥 Comando WebSocket recibido: system[0m
+[0;32mI (34532) RT_CMD: 📥 Comando WebSocket recibido: presence_state[0m
+[0;32mI (34551) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (35213) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (35214) SUPABASE_CLIENT: Enviando petición HTTP (226 bytes)[0m
+[0;32mI (35366) SUPABASE_CLIENT: Respuesta recibida (966 bytes)[0m
+[0;32mI (35369) SUPABASE_CLIENT: HTTP Status: 200[0m
+[0;32mI (35369) SUPABASE_CLIENT: Respuesta recibida: 83 bytes - 4d[0m
+{"success":true,"link_code":"926354","expires_at":"2026-03-01T16:17:16.477Z"}
+
+[0;32mI (35377) SUPABASE_CLIENT: JSON parseado: 4[0m
+[1;31mE (35380) SUPABASE_CLIENT: No se encontró link_code en respuesta[0m
+[0;33mW (35386) http_server: Error obteniendo link_code, reintentando en 2s...[0m
+[0;32mI (35395) http_server: Intentando obtener link_code...[0m
+[0;32mI (35398) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (36333) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (36990) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (36991) SUPABASE_CLIENT: Enviando petición HTTP (226 bytes)[0m
+[0;32mI (37127) wifi:<ba-add>idx:2 (ifx:1, 50:3e:aa:76:f8:0f), tid:0, ssn:43, winSize:64[0m
+[0;32mI (37229) SUPABASE_CLIENT: Respuesta recibida (966 bytes)[0m
+[0;32mI (37232) SUPABASE_CLIENT: HTTP Status: 200[0m
+[0;32mI (37233) SUPABASE_CLIENT: Respuesta recibida: 83 bytes - 4d[0m
+{"success":true,"link_code":"299544","expires_at":"2026-03-01T16:17:18.344Z"}
+
+[0;32mI (37240) SUPABASE_CLIENT: JSON parseado: 4[0m
+[1;31mE (37244) SUPABASE_CLIENT: No se encontró link_code en respuesta[0m
+[0;33mW (37250) http_server: Error obteniendo link_code, reintentando en 2s...[0m
+[0;32mI (37260) http_server: Intentando obtener link_code...[0m
+[0;32mI (37261) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (38195) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (38863) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (38864) SUPABASE_CLIENT: Enviando petición HTTP (226 bytes)[0m
+[0;32mI (39032) SUPABASE_CLIENT: Respuesta recibida (966 bytes)[0m
+[0;32mI (39035) SUPABASE_CLIENT: HTTP Status: 200[0m
+[0;32mI (39036) SUPABASE_CLIENT: Respuesta recibida: 83 bytes - 4d[0m
+{"success":true,"link_code":"758219","expires_at":"2026-03-01T16:17:20.143Z"}
+
+[0;32mI (39043) SUPABASE_CLIENT: JSON parseado: 4[0m
+[1;31mE (39047) SUPABASE_CLIENT: No se encontró link_code en respuesta[0m
+[0;33mW (39053) http_server: Error obteniendo link_code, reintentando en 2s...[0m
+[0;32mI (39062) http_server: Intentando obtener link_code...[0m
+[0;32mI (39064) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (40013) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (40671) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m
+[0;32mI (40671) SUPABASE_CLIENT: Enviando petición HTTP (226 bytes)[0m
+[0;32mI (40835) SUPABASE_CLIENT: Respuesta recibida (966 bytes)[0m
+[0;32mI (40838) SUPABASE_CLIENT: HTTP Status: 200[0m
+[0;32mI (40839) SUPABASE_CLIENT: Respuesta recibida: 83 bytes - 4d[0m
+{"success":true,"link_code":"507144","expires_at":"2026-03-01T16:17:21.954Z"}
+
+[0;32mI (40847) SUPABASE_CLIENT: JSON parseado: 4[0m
+[1;31mE (40850) SUPABASE_CLIENT: No se encontró link_code en respuesta[0m
+[0;33mW (40856) http_server: Error obteniendo link_code, reintentando en 2s...[0m
+[0;32mI (40865) http_server: Intentando obtener link_code...[0m
+[0;32mI (40867) SUPABASE_CLIENT: Solicitando link_code a Supabase...[0m
+[0;32mI (41818) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (42494) SUPABASE_CLIENT: ✅ Conexión TLS establecida[0m

@@ -11,7 +11,7 @@
 #include "esp_wifi.h"
 #include "esp_netif.h"
 #include "esp_event.h"
-#include "dns_server.h"
+#include "esp_mac.h"
 #include "http_server.h"
 
 #include <string.h>
@@ -32,6 +32,7 @@ static const char *TAG = "wifi_prov";
 
 // Event bits
 #define PROV_STOP_BIT       BIT0
+#define SCAN_DONE_BIT        BIT1
 
 // Variables estáticas
 static struct {
@@ -56,6 +57,9 @@ static struct {
 // Handlers de eventos
 static void wifi_event_handler(void *arg, esp_event_base_t event_base,
                                int32_t event_id, void *event_data);
+
+// Forward declaration
+static void notify_state(prov_state_t new_state);
 
 // ============================================================================
 // Inicialización
@@ -165,18 +169,10 @@ esp_err_t wifi_provisioner_start(prov_event_callback_t event_cb, void *ctx)
     esp_netif_set_ip_info(s_prov.ap_netif, &ip_info);
     esp_netif_dhcps_start(s_prov.ap_netif);
 
-    // Iniciar servidor DNS (captive portal)
-    ret = dns_server_start();
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Error iniciando DNS server: %s", esp_err_to_name(ret));
-        return ret;
-    }
-
     // Iniciar servidor HTTP
     ret = http_server_start();
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Error iniciando HTTP server: %s", esp_err_to_name(ret));
-        dns_server_stop();
         return ret;
     }
 
@@ -198,9 +194,8 @@ esp_err_t wifi_provisioner_stop(void)
 
     notify_state(PROV_STATE_STOPPING);
 
-    // Detener servidores
+    // Detener servidor HTTP
     http_server_stop();
-    dns_server_stop();
 
     // Destruir interfaz AP
     if (s_prov.ap_netif) {
@@ -237,6 +232,9 @@ esp_err_t wifi_provisioner_scan(wifi_scan_result_t *results,
 
     ESP_LOGI(TAG, "Escaneando redes WiFi...");
 
+    // Limpiar el bit de scan done
+    xEventGroupClearBits(s_prov.event_group, SCAN_DONE_BIT);
+
     wifi_scan_config_t scan_config = {
         .ssid = NULL,
         .bssid = NULL,
@@ -245,10 +243,24 @@ esp_err_t wifi_provisioner_scan(wifi_scan_result_t *results,
         .scan_type = WIFI_SCAN_TYPE_ACTIVE,
     };
 
-    esp_err_t ret = esp_wifi_scan_start(&scan_config, true);
+    esp_err_t ret = esp_wifi_scan_start(&scan_config, false);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Error iniciando scan: %s", esp_err_to_name(ret));
         return ret;
+    }
+
+    // Esperar a que el scan termine (timeout 10s)
+    EventBits_t bits = xEventGroupWaitBits(s_prov.event_group,
+                                            SCAN_DONE_BIT,
+                                            pdFALSE,
+                                            pdFALSE,
+                                            pdMS_TO_TICKS(10000));
+
+    if (bits & SCAN_DONE_BIT) {
+        ESP_LOGD(TAG, "Scan completado, obteniendo resultados...");
+    } else {
+        ESP_LOGE(TAG, "Timeout esperando scan");
+        return ESP_ERR_TIMEOUT;
     }
 
     // Esperar resultados
@@ -422,6 +434,13 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base,
                 wifi_event_ap_stadisconnected_t *event = event_data;
                 ESP_LOGI(TAG, "Station desconectada del SoftAP: " MACSTR,
                          MAC2STR(event->mac));
+                break;
+            }
+
+            case WIFI_EVENT_SCAN_DONE: {
+                wifi_event_sta_scan_done_t *event = event_data;
+                ESP_LOGD(TAG, "Scan completado, status: %d", event->status);
+                xEventGroupSetBits(s_prov.event_group, SCAN_DONE_BIT);
                 break;
             }
 

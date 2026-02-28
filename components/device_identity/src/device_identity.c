@@ -6,6 +6,8 @@
 #include "device_identity.h"
 #include "esp_log.h"
 #include "esp_system.h"
+#include "esp_mac.h"
+#include "esp_random.h"
 #include "nvs_flash.h"
 #include "nvs.h"
 #include <string.h>

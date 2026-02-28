@@ -10,6 +10,7 @@
  */
 
 #include "supabase_client.h"
+#include "device_identity.h"
 #include "sntp_sync.h"
 #include "esp_log.h"
 #include "esp_tls.h"
@@ -156,9 +157,73 @@ char *create_event_json(const device_event_t *event)
 // === CONFIGURACIÓN TLS ===
 #define SUPABASE_PORT 443
 #define SUPABASE_PATH "/functions/v1/ghost-event-public"
+#define SUPABASE_TOKEN_PATH "/functions/v1/ghost-token-create"
 #define SUPABASE_RESPONSE_BUF_SIZE 1024
 
 // === FUNCIONES PRIVADAS ===
+
+/**
+ * @brief Decodifica Transfer-Encoding: chunked
+ * @param chunked_data Datos codificados con chunked encoding
+ * @param decoded Buffer donde guardar el resultado decodificado
+ * @param decoded_size Tamaño del buffer decoded
+ * @return Longitud de datos decodificados o 0 si error
+ *
+ * Formato chunked:
+ *   [chunk_size_hex]\r\n
+ *   [chunk_data]\r\n
+ *   ...
+ *   0\r\n
+ *   \r\n
+ */
+static size_t decode_chunked(const char *chunked_data, char *decoded, size_t decoded_size)
+{
+    const char *p = chunked_data;
+    size_t decoded_len = 0;
+
+    while (*p != '\0') {
+        // Leer tamaño del chunk (hexadecimal hasta \r\n)
+        char chunk_size_str[16];
+        const char *hex_end = strstr(p, "\r\n");
+        if (!hex_end) break;
+
+        size_t hex_len = hex_end - p;
+        if (hex_len >= sizeof(chunk_size_str) - 1) break;
+        memcpy(chunk_size_str, p, hex_len);
+        chunk_size_str[hex_len] = '\0';
+
+        // Parsear hex a entero
+        char *endptr;
+        long chunk_size = strtol(chunk_size_str, &endptr, 16);
+        if (*endptr != '\0' || chunk_size < 0) break;
+
+        // Chunk size 0 = fin
+        if (chunk_size == 0) {
+            break;
+        }
+
+        // Mover al inicio del data (saltar \r\n)
+        p = hex_end + 2;
+
+        // Verificar espacio
+        if (decoded_len + (size_t)chunk_size > decoded_size - 1) {
+            chunk_size = decoded_size - decoded_len - 1;
+        }
+
+        // Copiar data del chunk
+        memcpy(decoded + decoded_len, p, chunk_size);
+        decoded_len += chunk_size;
+        p += chunk_size;
+
+        // Saltar \r\n después del data
+        if (p[0] == '\r' && p[1] == '\n') {
+            p += 2;
+        }
+    }
+
+    decoded[decoded_len] = '\0';
+    return decoded_len;
+}
 
 /**
  * @brief Construye y envía petición HTTP sobre conexión TLS
@@ -314,11 +379,28 @@ static esp_err_t read_http_response(esp_tls_t *tls, int *http_status, char *body
     }
 
     // Buscar el body (después de \r\n\r\n)
-    char *body_start = strstr(buffer, "\r\n\r\n");
-    if (body_start && body) {
-        body_start += 4;
-        strncpy(body, body_start, body_size - 1);
-        body[body_size - 1] = '\0';
+    char *headers_end = strstr(buffer, "\r\n\r\n");
+    if (headers_end && body) {
+        char *body_start = headers_end + 4;
+        size_t body_len = total_read - (body_start - buffer);
+
+        // Verificar si usa Transfer-Encoding: chunked
+        bool is_chunked = (strstr(buffer, "Transfer-Encoding:") != NULL &&
+                          strstr(buffer, "chunked") != NULL);
+
+        if (is_chunked) {
+            ESP_LOGI(TAG, "Detectado Transfer-Encoding: chunked, decodificando...");
+            body_len = decode_chunked(body_start, body, body_size);
+            ESP_LOGI(TAG, "Body decodificado: %zu bytes", body_len);
+        } else {
+            // Copiar body directamente
+            if (body_len >= body_size) body_len = body_size - 1;
+            memcpy(body, body_start, body_len);
+            body[body_len] = '\0';
+            ESP_LOGI(TAG, "Body copiado: %zu bytes", body_len);
+        }
+    } else {
+        body[0] = '\0';
     }
 
     return ESP_OK;
@@ -488,4 +570,110 @@ esp_err_t supabase_send_event(const device_event_t *event)
 bool supabase_is_initialized(void)
 {
     return s_ctx.initialized;
+}
+
+// === FUNCIÓN PÚBLICA: Obtener link_code ===
+esp_err_t supabase_get_link_code(char *link_code)
+{
+    if (!s_ctx.initialized) {
+        ESP_LOGE(TAG, "Client not initialized");
+        return ESP_ERR_INVALID_STATE;
+    }
+
+    if (link_code == NULL) {
+        ESP_LOGE(TAG, "Invalid parameters");
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    ESP_LOGI(TAG, "Solicitando link_code a Supabase...");
+
+    // Obtener device_id
+    char device_id[DEVICE_ID_LEN];
+    if (device_identity_get_id(device_id) != ESP_OK) {
+        ESP_LOGE(TAG, "Error obteniendo device_id");
+        return ESP_FAIL;
+    }
+
+    // Crear JSON body con device_id
+    cJSON *json = cJSON_CreateObject();
+    if (json == NULL) {
+        ESP_LOGE(TAG, "Failed to create JSON object");
+        return ESP_ERR_NO_MEM;
+    }
+    cJSON_AddStringToObject(json, "device_id", device_id);
+
+    char *json_str = cJSON_Print(json);
+    cJSON_Delete(json);
+
+    if (json_str == NULL) {
+        ESP_LOGE(TAG, "Failed to create JSON string");
+        return ESP_ERR_NO_MEM;
+    }
+
+    // Tomar mutex para acceso exclusivo
+    if (xSemaphoreTake(s_tls_mutex, pdMS_TO_TICKS(5000)) != pdTRUE) {
+        ESP_LOGE(TAG, "Timeout esperando mutex TLS");
+        free(json_str);
+        return ESP_ERR_TIMEOUT;
+    }
+
+    // Crear nueva conexión TLS
+    esp_tls_t *tls = create_connection();
+    if (tls == NULL) {
+        xSemaphoreGive(s_tls_mutex);
+        free(json_str);
+        return ESP_FAIL;
+    }
+
+    // Enviar petición HTTP a ghost-token-create
+    esp_err_t err = send_http_request(tls, s_ctx.host, SUPABASE_TOKEN_PATH,
+                                       DEVICE_KEY, json_str);
+    free(json_str);
+
+    if (err != ESP_OK) {
+        esp_tls_conn_destroy(tls);
+        xSemaphoreGive(s_tls_mutex);
+        return err;
+    }
+
+    // Leer respuesta
+    int http_status = 0;
+    char response_body[SUPABASE_RESPONSE_BUF_SIZE] = {0};
+    err = read_http_response(tls, &http_status, response_body, sizeof(response_body));
+
+    // Cerrar conexión
+    esp_tls_conn_destroy(tls);
+    xSemaphoreGive(s_tls_mutex);
+
+    if (err != ESP_OK) {
+        return err;
+    }
+
+    ESP_LOGI(TAG, "HTTP Status: %d", http_status);
+
+    // Parsear JSON para extraer link_code
+    if (http_status >= 200 && http_status < 300) {
+        cJSON *response = cJSON_Parse(response_body);
+        if (response == NULL) {
+            ESP_LOGE(TAG, "Error parseando respuesta JSON: %s", response_body);
+            return ESP_FAIL;
+        }
+
+        cJSON *code = cJSON_GetObjectItem(response, "link_code");
+        if (code == NULL || !cJSON_IsString(code)) {
+            ESP_LOGE(TAG, "No se encontró link_code en respuesta: %s", response_body);
+            cJSON_Delete(response);
+            return ESP_FAIL;
+        }
+
+        strncpy(link_code, code->valuestring, 7);
+        link_code[7] = '\0';
+        cJSON_Delete(response);
+
+        ESP_LOGI(TAG, "✅ Link code obtenido: %s", link_code);
+        return ESP_OK;
+    } else {
+        ESP_LOGW(TAG, "⚠️ Error del servidor: HTTP %d", http_status);
+        return ESP_FAIL;
+    }
 }

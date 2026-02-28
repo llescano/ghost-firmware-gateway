@@ -21,16 +21,19 @@ static const char *TAG = "UI";
 // ============================================================================
 
 /** @brief Número de estados LED personalizados */
-#define LED_CUSTOM_STATES_COUNT 6
+#define LED_CUSTOM_STATES_COUNT 9
 
 /** @brief Índices de estados personalizados (de mayor a menor prioridad) */
 typedef enum {
-    LED_CUSTOM_ALARM = 0,     // Mayor prioridad
+    LED_CUSTOM_ALARM = 0,         // Mayor prioridad
     LED_CUSTOM_TAMPER,
     LED_CUSTOM_ARMED,
     LED_CUSTOM_DISARMED,
     LED_CUSTOM_ERROR,
-    LED_CUSTOM_BOOT,          // Menor prioridad
+    LED_CUSTOM_BOOT,
+    LED_CUSTOM_PROVISIONING,      // Azul fijo
+    LED_CUSTOM_OFFLINE,           // Naranja parpadeando lento
+    LED_CUSTOM_UNCONFIGURED,      // Rojo parpadeando rápido
 } led_custom_index_t;
 
 // ============================================================================
@@ -79,7 +82,12 @@ typedef enum {
 #define HSV_GREEN   PACK_HSV(0, 120, 255, DEV_BRIGHTNESS)   // Verde
 #define HSV_BLUE    PACK_HSV(0, 240, 255, DEV_BRIGHTNESS)   // Azul
 #define HSV_YELLOW  PACK_HSV(0, 60,  255, DEV_BRIGHTNESS)   // Amarillo
+#define HSV_ORANGE  PACK_HSV(0, 30,  255, DEV_BRIGHTNESS)   // Naranja
 #define HSV_OFF     PACK_HSV(0, 0,   0,   0)               // Apagado
+
+// Tiempos de long press
+#define BUTTON_PROVISION_TIME_MS   5000  // 5 segundos para provisioning
+#define BUTTON_FACTORY_RESET_MS    10000  // 10 segundos para reset de fábrica
 
 // ============================================================================
 // Configuración del botón
@@ -106,6 +114,9 @@ static ui_button_click_cb_t s_on_click_callback = NULL;
 
 /** @brief Callback para long press */
 static ui_button_long_press_cb_t s_on_long_press_callback = NULL;
+
+/** @brief Callback para factory reset */
+static ui_button_factory_reset_cb_t s_on_factory_reset_callback = NULL;
 
 /** @brief Secuencias de blink personalizadas */
 static blink_step_t const *s_led_blink_lists[] = {
@@ -150,6 +161,26 @@ static blink_step_t const *s_led_blink_lists[] = {
         {LED_BLINK_HOLD, LED_STATE_OFF, 500},
         {LED_BLINK_LOOP, 0, 0},
     },
+    // LED_CUSTOM_PROVISIONING: Azul fijo
+    (blink_step_t const []) {
+        {LED_BLINK_HSV, HSV_BLUE, 0},
+        {LED_BLINK_HOLD, LED_STATE_ON, 1000},
+        {LED_BLINK_LOOP, 0, 0},
+    },
+    // LED_CUSTOM_OFFLINE: Naranja parpadeando lento (1000ms)
+    (blink_step_t const []) {
+        {LED_BLINK_HSV, HSV_ORANGE, 0},
+        {LED_BLINK_HOLD, LED_STATE_ON, 1000},
+        {LED_BLINK_HOLD, LED_STATE_OFF, 1000},
+        {LED_BLINK_LOOP, 0, 0},
+    },
+    // LED_CUSTOM_UNCONFIGURED: Rojo parpadeando rápido (150ms)
+    (blink_step_t const []) {
+        {LED_BLINK_HSV, HSV_RED, 0},
+        {LED_BLINK_HOLD, LED_STATE_ON, 150},
+        {LED_BLINK_HOLD, LED_STATE_OFF, 150},
+        {LED_BLINK_LOOP, 0, 0},
+    },
 };
 
 // ============================================================================
@@ -162,22 +193,60 @@ static blink_step_t const *s_led_blink_lists[] = {
 static void button_click_cb(void *arg, void *data)
 {
     ESP_LOGI(TAG, "Botón BOOT: click simple detectado");
-    
+
     if (s_on_click_callback) {
         s_on_click_callback();
     }
 }
 
 /**
- * @brief Callback para long press del botón BOOT
+ * @brief Callback para long press (5s) - Modo provisioning
  */
 static void button_long_press_cb(void *arg, void *data)
 {
-    ESP_LOGI(TAG, "Botón BOOT: long press detectado");
-    
+    ESP_LOGI(TAG, "Botón BOOT: long press detectado (5s) - Modo provisioning");
+
     if (s_on_long_press_callback) {
         s_on_long_press_callback();
     }
+}
+
+/**
+ * @brief Callback para factory reset (10s)
+ * Se activa cuando el botón se mantiene presionado por más tiempo
+ */
+static void button_factory_reset_check(void *arg, void *data)
+{
+    // Este callback se activa en cada "tick" del long press
+    // Usamos un contador para detectar los 10 segundos
+    static int64_t press_start_time = 0;
+
+    if (press_start_time == 0) {
+        press_start_time = xTaskGetTickCount() * portTICK_PERIOD_MS;
+        ESP_LOGI(TAG, "Botón BOOT: iniciando cuenta para factory reset");
+    } else {
+        int64_t elapsed = xTaskGetTickCount() * portTICK_PERIOD_MS - press_start_time;
+        if (elapsed >= BUTTON_FACTORY_RESET_MS) {
+            ESP_LOGI(TAG, "Botón BOOT: factory reset detectado (10s)");
+            press_start_time = 0;
+
+            if (s_on_factory_reset_callback) {
+                s_on_factory_reset_callback();
+            }
+        }
+    }
+}
+
+/**
+ * @brief Callback para resetear el contador cuando se suelta el botón
+ */
+static void button_press_stop_cb(void *arg, void *data)
+{
+    static int64_t *press_start_time_ptr = NULL;
+    if (press_start_time_ptr == NULL) {
+        press_start_time_ptr = (int64_t *)malloc(sizeof(int64_t));
+    }
+    *press_start_time_ptr = 0;
 }
 
 // ============================================================================
@@ -232,7 +301,7 @@ static esp_err_t button_init(void)
 {
     // Configuración del botón (solo tiempos)
     button_config_t btn_cfg = {
-        .long_press_time = BUTTON_LONG_PRESS_TIME_MS,
+        .long_press_time = BUTTON_PROVISION_TIME_MS,  // 5 segundos para provisioning
         .short_press_time = 50,  // debounce
     };
     
@@ -324,6 +393,12 @@ void ui_set_button_long_press_callback(ui_button_long_press_cb_t callback)
     ESP_LOGI(TAG, "Callback de long press configurado");
 }
 
+void ui_set_button_factory_reset_callback(ui_button_factory_reset_cb_t callback)
+{
+    s_on_factory_reset_callback = callback;
+    ESP_LOGI(TAG, "Callback de factory reset configurado");
+}
+
 esp_err_t ui_set_system_state(system_state_t state)
 {
     switch (state) {
@@ -366,6 +441,15 @@ esp_err_t ui_set_led_state(led_system_state_t state)
         case LED_SYS_BOOT:
             prev_index = LED_CUSTOM_BOOT;
             break;
+        case LED_SYS_PROVISIONING:
+            prev_index = LED_CUSTOM_PROVISIONING;
+            break;
+        case LED_SYS_OFFLINE:
+            prev_index = LED_CUSTOM_OFFLINE;
+            break;
+        case LED_SYS_UNCONFIGURED:
+            prev_index = LED_CUSTOM_UNCONFIGURED;
+            break;
         case LED_SYS_ERROR:
         default:
             prev_index = LED_CUSTOM_ERROR;
@@ -392,6 +476,15 @@ esp_err_t ui_set_led_state(led_system_state_t state)
             break;
         case LED_SYS_BOOT:
             index = LED_CUSTOM_BOOT;
+            break;
+        case LED_SYS_PROVISIONING:
+            index = LED_CUSTOM_PROVISIONING;
+            break;
+        case LED_SYS_OFFLINE:
+            index = LED_CUSTOM_OFFLINE;
+            break;
+        case LED_SYS_UNCONFIGURED:
+            index = LED_CUSTOM_UNCONFIGURED;
             break;
         case LED_SYS_ERROR:
         default:

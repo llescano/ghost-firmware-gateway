@@ -42,18 +42,25 @@ static bool s_wifi_connected = false;
 static bool s_provisioning_mode = false;
 
 // ============================================================================
+// Forward declarations
+// ============================================================================
+
+static void on_provisioner_event(prov_state_t state, void *ctx);
+static void init_wifi_services(void);
+
+// ============================================================================
 // Callbacks del botón BOOT
 // ============================================================================
 
 /**
  * @brief Callback para click simple del botón BOOT
- * 
+ *
  * Toggle entre ARMED y DISARMED
  */
 static void on_boot_button_click(void)
 {
     system_state_t current = controller_get_state();
-    
+
     if (current == SYS_STATE_DISARMED) {
         ESP_LOGI(TAG, "Botón: Armando sistema");
         controller_arm();
@@ -68,14 +75,57 @@ static void on_boot_button_click(void)
 }
 
 /**
- * @brief Callback para long press del botón BOOT
- * 
- * Siempre desarma el sistema (útil para emergencias)
+ * @brief Callback para long press del botón BOOT (~5 segundos)
+ *
+ * Inicia modo de provisionamiento
  */
 static void on_boot_button_long_press(void)
 {
-    ESP_LOGI(TAG, "Botón: Long press - Desarmando sistema");
-    controller_disarm();
+    ESP_LOGI(TAG, "Botón: Long press (5s) - Iniciando modo provisionamiento");
+
+    // Iniciar modo provisioning
+    esp_err_t ret = wifi_provisioner_init();
+    if (ret == ESP_OK) {
+        ret = wifi_provisioner_start(on_provisioner_event, NULL);
+    }
+
+    if (ret == ESP_OK) {
+        s_provisioning_mode = true;
+        ui_set_led_state(LED_SYS_PROVISIONING);
+
+        char ap_ssid[32];
+        wifi_provisioner_get_ap_ssid(ap_ssid);
+        ESP_LOGI(TAG, "========================================");
+        ESP_LOGI(TAG, "  MODO PROVISIONAMIENTO ACTIVO");
+        ESP_LOGI(TAG, "========================================");
+        ESP_LOGI(TAG, "  SSID: %s", ap_ssid);
+        ESP_LOGI(TAG, "  IP: %s", wifi_provisioner_get_ap_ip());
+        ESP_LOGI(TAG, "========================================");
+    } else {
+        ESP_LOGE(TAG, "Error iniciando modo provisionamiento");
+    }
+}
+
+/**
+ * @brief Callback para factory reset del botón BOOT (~10 segundos)
+ *
+ * Resetea el dispositivo a estado de fábrica
+ */
+static void on_boot_button_factory_reset(void)
+{
+    ESP_LOGI(TAG, "Botón: Factory reset (10s) - Reseteando dispositivo");
+
+    // Resetear identidad
+    device_identity_reset();
+
+    ESP_LOGI(TAG, "========================================");
+    ESP_LOGI(TAG, "  DISPOSITIVO RESETEADO");
+    ESP_LOGI(TAG, "========================================");
+    ESP_LOGI(TAG, "  Presiona BOOT 5s para reconfigurar");
+    ESP_LOGI(TAG, "========================================");
+
+    // Mostrar estado unconfigured
+    ui_set_led_state(LED_SYS_UNCONFIGURED);
 }
 
 // ============================================================================
@@ -100,11 +150,10 @@ static void on_wifi_state_change(wifi_state_t state, void *ctx)
             ESP_LOGI(TAG, "WiFi conectado! IP: %s", ip_str);
         }
 
-        // Si estábamos en modo provisionamiento, detenerlo
+        // Si estábamos en modo provisionamiento, NO detenerlo inmediatamente
+        // Dejar que el cliente termine de obtener el link_code
         if (s_provisioning_mode) {
-            ESP_LOGI(TAG, "Deteniendo modo provisionamiento...");
-            wifi_provisioner_stop();
-            s_provisioning_mode = false;
+            ESP_LOGI(TAG, "WiFi conectado en modo provisionamiento - manteniendo SoftAP activo");
         }
 
         // Inicializar servicios que requieren WiFi
@@ -150,12 +199,16 @@ static void init_wifi_services(void)
     ESP_LOGI(TAG, "Inicializando SNTP...");
     sntp_sync_init();
 
-    // Inicializar cliente Supabase
-    ESP_LOGI(TAG, "Inicializando cliente Supabase...");
-    ret = supabase_client_init();
-    if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Error inicializando Supabase client: %s", esp_err_to_name(ret));
-        return;
+    // Inicializar cliente Supabase solo si no está inicializado
+    if (!supabase_is_initialized()) {
+        ESP_LOGI(TAG, "Inicializando cliente Supabase...");
+        ret = supabase_client_init();
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Error inicializando Supabase client: %s", esp_err_to_name(ret));
+            return;
+        }
+    } else {
+        ESP_LOGI(TAG, "Cliente Supabase ya inicializado, reanudando...");
     }
 
     // Enviar evento de dispositivo conectado
@@ -261,40 +314,39 @@ void app_main(void)
     // 5. Configurar callbacks del botón BOOT
     ui_set_button_click_callback(on_boot_button_click);
     ui_set_button_long_press_callback(on_boot_button_long_press);
+    ui_set_button_factory_reset_callback(on_boot_button_factory_reset);
 
     // 6. Inicializar WiFi Manager
     ESP_LOGI(TAG, "Inicializando WiFi Manager...");
     ESP_ERROR_CHECK(wifi_manager_init());
+
+    // 6.1. Inicializar WiFi Provisioner (para modo setup)
+    ESP_LOGI(TAG, "Inicializando WiFi Provisioner...");
+    ESP_ERROR_CHECK(wifi_provisioner_init());
+
+    // 6.2. Inicializar cliente Supabase (necesario para provisioning)
+    ESP_LOGI(TAG, "Inicializando cliente Supabase...");
+    esp_err_t ret = supabase_client_init();
+    if (ret != ESP_OK) {
+        ESP_LOGW(TAG, "Advertencia: No se pudo inicializar Supabase client: %s", esp_err_to_name(ret));
+        // Continuar sin Supabase - el provisioning funcionará pero sin link_code
+    }
 
     // 7. Registrar callback de WiFi
     wifi_manager_set_callback(on_wifi_state_change, NULL);
 
     // 8. Verificar si el dispositivo está provisionado
     if (!device_identity_is_provisioned()) {
-        // Modo PROVISIONAMIENTO: iniciar SoftAP con portal cautivo
+        // Dispositivo NO provisionado - mostrar estado y esperar interacción del usuario
         ESP_LOGI(TAG, "");
-        ESP_LOGI(TAG, "📱 Dispositivo no provisionado - Iniciando modo setup");
+        ESP_LOGI(TAG, "⚠️  Dispositivo no configurado");
+        ESP_LOGI(TAG, "");
+        ESP_LOGI(TAG, "Para configurar:");
+        ESP_LOGI(TAG, "  - Presiona BOOT (5s) para iniciar modo setup");
         ESP_LOGI(TAG, "");
 
-        ESP_ERROR_CHECK(wifi_provisioner_init());
-        ESP_ERROR_CHECK(wifi_provisioner_start(on_provisioner_event, NULL));
-
-        s_provisioning_mode = true;
-
-        char ap_ssid[32];
-        wifi_provisioner_get_ap_ssid(ap_ssid);
-        ESP_LOGI(TAG, "========================================");
-        ESP_LOGI(TAG, "  MODO PROVISIONAMIENTO ACTIVO");
-        ESP_LOGI(TAG, "========================================");
-        ESP_LOGI(TAG, "  SSID: %s", ap_ssid);
-        ESP_LOGI(TAG, "  IP: %s", wifi_provisioner_get_ap_ip());
-        ESP_LOGI(TAG, "========================================");
-        ESP_LOGI(TAG, "");
-        ESP_LOGI(TAG, "1. Conéctate a la red WiFi arriba indicada");
-        ESP_LOGI(TAG, "2. Se abrirá automáticamente el portal de configuración");
-        ESP_LOGI(TAG, "3. Selecciona tu red WiFi e ingresa la contraseña");
-        ESP_LOGI(TAG, "4. Escanea el QR para vincular el dispositivo");
-        ESP_LOGI(TAG, "");
+        // Mostrar estado LED de "no configurado"
+        ui_set_led_state(LED_SYS_UNCONFIGURED);
 
     } else {
         // MODO NORMAL: conectar con credenciales guardadas
@@ -302,7 +354,7 @@ void app_main(void)
         esp_err_t ret = wifi_manager_connect_saved();
         if (ret != ESP_OK) {
             ESP_LOGE(TAG, "No se pudo conectar con credenciales guardadas: %s", esp_err_to_name(ret));
-            ESP_LOGI(TAG, "Podría ser necesario resetear la configuración...");
+            ESP_LOGI(TAG, "Presiona BOOT (5s) para reconfigurar WiFi");
             // No iniciar modo AP automáticamente - podría ser un problema temporal
         }
     }

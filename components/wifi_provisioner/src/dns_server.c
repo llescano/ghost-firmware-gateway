@@ -10,7 +10,11 @@
 #include "esp_log.h"
 #include "esp_wifi.h"
 #include "esp_netif.h"
-
+#include "lwip/err.h"
+#include "lwip/sockets.h"
+#include "lwip/sys.h"
+#include "lwip/netdb.h"
+#include "lwip/dns.h"
 #include <string.h>
 
 static const char *TAG = "dns_server";
@@ -30,7 +34,7 @@ typedef struct {
 typedef struct {
     uint16_t type;
     uint16_t class;
-} __attribute__((packed)) dns_query_t);
+} __attribute__((packed)) dns_query_t;
 
 // DNS response structure
 typedef struct {
@@ -40,7 +44,7 @@ typedef struct {
     uint32_t ttl;
     uint16_t len;
     uint32_t addr;
-} __attribute__((packed)) dns_answer_t);
+} __attribute__((packed)) dns_answer_t;
 
 // DNS reply packet buffer
 #define DNS_REPLY_LEN 256
@@ -155,7 +159,7 @@ static int dns_reply_build(const uint8_t *req, size_t req_len, uint8_t *reply, s
 /**
  * @brief Handler UDP del servidor DNS
  */
-static void dns_server_recv(void *arg, esp_udp *pcb, struct pbuf *p, const ip_addr_t *addr, uint16_t port)
+static void dns_server_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, uint16_t port)
 {
     if (p == NULL) return;
 
