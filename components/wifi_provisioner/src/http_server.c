@@ -29,22 +29,50 @@ static esp_timer_handle_t s_link_code_timer = NULL;
 static char s_link_code[8] = {0};
 static bool s_link_code_ready = false;
 static bool s_link_code_pending = false;
+static bool s_link_code_timeout = false;
+static int64_t s_link_code_start_time = 0;
+
+// Timeout para obtener link_code (5 minutos = 300 segundos)
+#define LINK_CODE_TIMEOUT_US 300000000  // 300s en microsegundos
 
 /**
  * @brief Callback del timer para obtener link_code en segundo plano
  *
  * Esta función se ejecuta en el contexto del timer, no del handler HTTP,
  * evitando el crash de lwip/mbedtls.
+ *
+ * Tiene un timeout de 5 minutos. Si no se puede obtener el link_code
+ * en ese tiempo, se marca como fallado y se detienen los reintentos.
  */
 static void link_code_timer_callback(void* arg)
 {
     if (s_link_code_pending && !s_link_code_ready) {
+        // Verificar timeout
+        int64_t current_time = esp_timer_get_time();
+        if (s_link_code_start_time > 0 &&
+            (current_time - s_link_code_start_time) > LINK_CODE_TIMEOUT_US) {
+
+            ESP_LOGW(TAG, "⚠️ Timeout obteniendo link_code (5 min). El usuario puede haber abandonado el proceso.");
+
+            // Detener reintentos
+            s_link_code_pending = false;
+            s_link_code_ready = false;
+            s_link_code_timeout = true;
+            s_link_code_start_time = 0;
+
+            // Opcional: Notificar a la UI que hay timeout
+            // Podríamos reiniciar el modo provisioning o mostrar un mensaje
+
+            return;
+        }
+
         ESP_LOGI(TAG, "Intentando obtener link_code...");
 
         esp_err_t ret = supabase_get_link_code(s_link_code);
         if (ret == ESP_OK) {
             s_link_code_ready = true;
             s_link_code_pending = false;
+            s_link_code_start_time = 0;
             ESP_LOGI(TAG, "✅ Link_code obtenido: %s", s_link_code);
         } else {
             ESP_LOGW(TAG, "Error obteniendo link_code, reintentando en 2s...");
@@ -341,6 +369,8 @@ static esp_err_t api_connect_handler(httpd_req_t *req)
     // Marcar que se debe obtener el link_code en segundo plano
     s_link_code_pending = true;
     s_link_code_ready = false;
+    s_link_code_timeout = false;
+    s_link_code_start_time = esp_timer_get_time();  // Iniciar timeout
 
     // Construir respuesta JSON en un solo buffer
     char response[128];
@@ -414,6 +444,9 @@ static esp_err_t api_link_code_handler(httpd_req_t *req)
         httpd_resp_sendstr(req, response);
     } else if (s_link_code_pending) {
         httpd_resp_sendstr(req, "{\"ready\":false}");
+    } else if (s_link_code_timeout) {
+        // Timeout - el usuario abandonó el proceso
+        httpd_resp_sendstr(req, "{\"ready\":false,\"error\":\"timeout\",\"message\":\"Tiempo de espera agotado. Presiona el botón BOOT para reiniciar la configuración.\"}");
     } else {
         httpd_resp_sendstr(req, "{\"ready\":false,\"error\":\"No pending request\"}");
     }
@@ -525,6 +558,13 @@ esp_err_t http_server_stop(void)
     if (s_link_code_timer != NULL) {
         esp_timer_stop(s_link_code_timer);
     }
+
+    // Resetear variables de link_code
+    s_link_code_pending = false;
+    s_link_code_ready = false;
+    s_link_code_timeout = false;
+    s_link_code_start_time = 0;
+    memset(s_link_code, 0, sizeof(s_link_code));
 
     esp_err_t ret = httpd_stop(s_server);
     s_server = NULL;

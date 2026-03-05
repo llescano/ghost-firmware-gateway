@@ -14,8 +14,9 @@ extern "C" {
 #define SUPABASE_TIMEOUT_MS 15000
 
 // === DEVICE KEY ===
-// Key única para autenticación del dispositivo (se puede rotar fácilmente)
-#define DEVICE_KEY "ghost-gateway-001"
+// TEMPORAL: Usa device_key de la DB hasta que implementemos NVS
+// TODO: Implementar NVS para generar/guardar device_key aleatorio
+#define DEVICE_KEY "c46c68ca4bfcc991795424f41c5cc887"
 
 // === ESTRUCTURAS ===
 

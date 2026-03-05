@@ -132,6 +132,12 @@ esp_err_t wifi_provisioner_start(prov_event_callback_t event_cb, void *ctx)
         return ret;
     }
 
+    // Desconectar STA si estaba conectado a otro router
+    // Esto evita conflictos de canal cuando el ESP32 cambia a AP+STA
+    ESP_LOGI(TAG, "Desconectando STA anterior...");
+    esp_wifi_disconnect();
+    vTaskDelay(pdMS_TO_TICKS(200));  // Esperar que se complete la desconexión
+
     // Cambiar a modo AP+STA
     ESP_LOGI(TAG, "Configurando WiFi en modo AP+STA...");
     ret = esp_wifi_set_mode(WIFI_MODE_APSTA);
@@ -333,6 +339,13 @@ esp_err_t wifi_provisioner_connect(const char *ssid, const char *password,
     notify_state(PROV_STATE_CONNECTING);
 
     ESP_LOGI(TAG, "Conectando a: %s", ssid);
+
+    // IMPORTANTE: Desconectar completamente el STA antes de intentar reconectar
+    // Esto evita problemas cuando el ESP32 ya está conectado al mismo WiFi
+    // El warning "sta is connected, disconnect before connecting to new ap" indica esto
+    ESP_LOGI(TAG, "Desconectando STA antes de nueva conexión...");
+    esp_wifi_disconnect();
+    vTaskDelay(pdMS_TO_TICKS(500));
 
     // Usar wifi_manager para conectar
     esp_err_t ret = wifi_manager_connect(ssid, password);

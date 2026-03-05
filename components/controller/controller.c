@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "ui.h"
 #include "supabase_client.h"
+#include "device_identity.h"
 #include <string.h>
 #include "esp_log.h"
 #include "nvs_flash.h"
@@ -42,6 +43,14 @@ static void send_state_change_event(system_state_t new_state, system_state_t old
         return;
     }
 
+    // Obtener el device_id real desde device_identity
+    char real_device_id[DEVICE_ID_LEN];
+    esp_err_t err = device_identity_get_id(real_device_id);
+    if (err != ESP_OK) {
+        ESP_LOGW(TAG, "No se pudo obtener device_id, usando fallback");
+        strncpy(real_device_id, "GATEWAY_UNKNOWN", DEVICE_ID_LEN);
+    }
+
     // Crear JSON con información del cambio de estado
     cJSON *state_info = cJSON_CreateObject();
     cJSON_AddStringToObject(state_info, "old_state", get_state_name(old_state));
@@ -55,7 +64,7 @@ static void send_state_change_event(system_state_t new_state, system_state_t old
     device_event_t event = {
         .event_type = "state_change",
         .event_timestamp = NULL,  // Se generará automáticamente
-        .device_id = "GATEWAY_001",
+        .device_id = real_device_id,  // Usar ID real del dispositivo
         .device_type = "GATEWAY",
         .presence = false,
         .distance_cm = 0.0f,

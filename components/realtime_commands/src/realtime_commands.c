@@ -6,6 +6,7 @@
 #include "realtime_commands.h"
 #include "phoenix_client.h"
 #include "controller.h"
+#include "device_identity.h"
 #include "esp_log.h"
 #include "string.h"
 #include "cJSON.h"
@@ -131,10 +132,16 @@ static void on_state_event(const char *event, const char *payload, void *user_da
         // Extraer device_id para evitar procesar eventos propios
         cJSON *device_id = cJSON_GetObjectItem(record, "device_id");
 
+        // Obtener el device_id real de este dispositivo
+        char my_device_id[DEVICE_ID_LEN];
+        if (device_identity_get_id(my_device_id) != ESP_OK) {
+            strncpy(my_device_id, "UNKNOWN", DEVICE_ID_LEN);
+        }
+
         // Ignorar eventos propios de este dispositivo
         if (device_id && device_id->valuestring &&
-            strcmp(device_id->valuestring, "GATEWAY_001") == 0) {
-            ESP_LOGD(TAG, "Ignorando evento propio");
+            strcmp(device_id->valuestring, my_device_id) == 0) {
+            ESP_LOGD(TAG, "Ignorando evento propio (device_id: %s)", my_device_id);
             cJSON_Delete(root);
             return;
         }
